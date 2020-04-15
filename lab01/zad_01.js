@@ -93,6 +93,9 @@ const word = 'react';
 const arrWord = [...word];
 console.log(arrWord);
 
+//operator ... rozdziela tutaj string na poszczególne literki i tworzy z nich tablice
+
+
 // Zadanie 5
 // Zapoznaj się z kodem poniżej. Jaki będzie jego wynik i dlaczego?
 
