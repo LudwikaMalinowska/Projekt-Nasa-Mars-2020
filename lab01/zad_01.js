@@ -182,3 +182,8 @@ let test2 = "let2";
 
 // Zadanie 7
 // Do czego używany jest 'use strict' w pierwszej linijce skryptu?
+
+//"use script" oznacza że program powinien działać w tzw "trybie ścisłym", 
+//czyli nie będzie możliwe użycie niezadeklarowanej zmiennej, albo
+//zmienna nie będzie mogła się zaczynać od 0, ani mieć taką samą nazwę
+//jak słowo kluczowe
