@@ -122,10 +122,10 @@ function showCar() {
     console.log('Great car!');
 }
 
-showCar();
+showCar(); //Great car!
 
-car;
-model;
+car; // Audi
+model; //A5
 
 //-------
 
@@ -133,10 +133,10 @@ var person = 'Bryan';
 
 (function differentName() {
     var person = 'Adam';
-    console.log(person);
+    console.log(person); //Adam
 })();
 
-console.log(person);
+console.log(person); //Bryan
 
 //-------
 
@@ -164,11 +164,21 @@ console.log(i);
 
 //-------
 
+console.log(test); //zwróci undefined
+
 var test = "var1";
 var test = "var2";
 
+console.log(test2); //zwróci błąd
+
 let test2 = "let1";
 let test2 = "let2";
+
+//var podlega hoistingowi, tzn deklaracja zmiennej jest wynoszona na początek kodu, 
+//i tylko jej deklaracja, bez przypisania, przez to można wywołać zmienną lub
+//funkcję przed jej zadeklarodaniem w kodzie (jej wartość będzie undefined)
+//jeżeli spróbujemy tak z let czy const, dostaniemy błąd
+
 
 // Zadanie 7
 // Do czego używany jest 'use strict' w pierwszej linijce skryptu?
