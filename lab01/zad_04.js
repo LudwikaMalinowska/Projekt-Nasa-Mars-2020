@@ -1,6 +1,6 @@
 "use strict"
 
-const fun1 = (tab, a, b, c) => {
+const fun1 = (tab, a, b = a, c = a) => {
 
     newArr = []
 
@@ -16,5 +16,5 @@ const fun1 = (tab, a, b, c) => {
 
 const arr = [1000, 2000, 3000, 400]
 
-const arr2 = fun1(arr, 1000, 2000, 3000)
+const arr2 = fun1(arr, 1000, 2000)
 console.log(arr2)
