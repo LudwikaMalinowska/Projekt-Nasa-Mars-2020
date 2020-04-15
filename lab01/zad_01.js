@@ -102,10 +102,14 @@ console.log(arrWord);
 var hello = 'Hello world!';
 var result = hello / 2;
 
-result;
+result; //NaN not a number
 
-Number.isNaN(result);
-Number.isNaN(hello);
+Number.isNaN(result); //true
+//funkcja is nan sprawdza czy podana zmienna jest typu NaN (not a number)
+//tutaj result jest NaN więc zwraca true
+Number.isNaN(hello); //false
+//hello nie jest liczbą, tylko stringiem, ale nie jest typu nan
+//Typem nan oznacza się błędy w obliczeniach np tutaj podzielenie stringa przez liczbę 2
 
 // Zadanie 6
 // Zapoznaj się z przykłądami poniżej. Jaka jest różnica między var a let/const?
