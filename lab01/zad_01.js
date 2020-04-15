@@ -60,6 +60,12 @@ console.log(number); {
 }
 console.log(number);
 
+//3
+//4
+//3
+//w bloku kodu została zadeklarowana nowa, druga zmienna number, która nie wpłynęła na
+//zewnętrzną zmienną number, zmienna number = 4 istnieje tylko w tym bloku kodu
+
 // Zadanie 4
 // Czym się różnią poniższe dwa fragmenty kodu?
 // Jak działa operator '...'?
