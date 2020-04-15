@@ -39,8 +39,15 @@ const person = {
 }
 
 console.log(person);
+// {firstName: "Jan", lastName: "Kowalski"}
 person = {};
+// error, nie można przypisać do stałej const
 console.log(person);
+//{firstName: "Jan", lastName: "Kowalski"}
+
+//ponowne przypisanie do stałej const się nie udało, więc wypisany na ekran został
+//ponownie taki sam, niezmieniony obiekt person
+
 
 // Zadanie 3 
 // Co zostanie wyświetlone na ekranie?
