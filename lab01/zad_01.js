@@ -66,6 +66,8 @@ console.log(number);
 //w bloku kodu została zadeklarowana nowa, druga zmienna number, która nie wpłynęła na
 //zewnętrzną zmienną number, zmienna number = 4 istnieje tylko w tym bloku kodu
 
+
+
 // Zadanie 4
 // Czym się różnią poniższe dwa fragmenty kodu?
 // Jak działa operator '...'?
@@ -79,6 +81,9 @@ console.log(newArr)
 const arr = [1, 2];
 const newArr = [...arr, 3, 4];
 console.log(newArr)
+
+//w pierwszej newArr wstawiona została tablica do tablicy, tzn. tablica jest elementem tablicy
+//w drugiej NewArr operator ... wyjmuje po kolei zawartość tablicy arr i wstawia do newArr
 
 // Zadanie 4a
 // Co zostanie wyświetlone na ekranie?
