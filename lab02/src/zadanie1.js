@@ -8,7 +8,11 @@ console.log(sum([1, 2, 3, 4, 5, 6, 7]))
 const delet = (arr) => arr.reduce((prev, curr, index, arr) => {
     // console.log(curr)
     if (curr < 0){
-        arr.splice(index, 1)
+        arr.splice(index, 1);
+        curr = prev;
+        index = index - 1;
+    } else {
+        arr[index] = curr * curr;
     }
 
     return arr
