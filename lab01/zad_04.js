@@ -1,8 +1,12 @@
 "use strict"
 
-const fun1 = (tab, a, b = a, c = a) => {
+// const fun1 = (tab, newArr, a, b = a, c = a) => {
+const fun1 = (tab, a, b, c) => {
 
-    newArr = []
+    if (typeof b === 'undefined') b = a;
+    if (typeof c === 'undefined') c = a;
+
+    const newArr = []
 
     tab.forEach(el => {
 
