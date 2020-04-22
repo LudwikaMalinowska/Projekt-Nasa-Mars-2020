@@ -47,8 +47,25 @@ const powtozenia = (arr) => arr.reduce((prev, curr, index, arr) => {
 
 }, dict)
 
+console.log("\nZadanie 1.4:")
 const dict = {}
 powtozenia(arr4)
 console.log(dict)
+
+//zadanie 1.5
+const arr5 = [
+    { id: 'abc', name: 'Ala' },
+    { id: 'def', name: 'Tomek' },
+    { id: 'ghi', name: 'Jan' }
+]
+
+const id = (arr) => arr.reduce((prev, curr, index, arr) => {
+
+
+
+
+}, arr5)
+
+
 
 
