@@ -7,7 +7,7 @@ console.log(sum([1, 2, 3, 4, 5, 6, 7]))
 //1.2
 const delet = (arr) => arr.reduce((prev, curr, index, arr) => {
     // console.log(curr)
-    if (curr < 0){
+    if (curr < 0) {
         arr.splice(index, 1);
         curr = prev;
         index = index - 1;
@@ -38,7 +38,7 @@ const arr4 = ['js', 'react', 'js', 'angular', 'angular', 'js']
 const powtozenia = (arr) => arr.reduce((prev, curr, index, arr) => {
 
     // console.log(index + ": " + curr)
-    if (isNaN(dict[`${curr}`])){
+    if (isNaN(dict[`${curr}`])) {
         dict[`${curr}`] = 1
     } else {
         dict[`${curr}`] += 1
@@ -59,12 +59,53 @@ const arr5 = [
     { id: 'ghi', name: 'Jan' }
 ]
 
+const arr6 = []
+
 const id = (arr) => arr.reduce((prev, curr, index, arr) => {
 
+    // arr6["${curr.id}"] = curr;
+    // arr6[curr.id.toString] = curr;
+    // console.log(index)
+    // if (prev === undefined){
+    //     // console.log(prev)
+    //     arr[`${curr.id}`] = curr;
+    //     // arr.shift()
+    //     // if (arr[index - 1] !== null ){
+    //     //     arr.splice(index - 1, 1);
+    //     // }
+    // } else {
+    //     // console.log(prev, prev.id)
+    //     arr[`${prev.id}`] = prev;
+    //     arr[`${curr.id}`] = curr;
+    //     // arr.shift();
+    //     // arr.shift();
+    //     arr.splice(index - 1, 2);
+    // }
 
+    // console.log(curr, curr.id)
+    // arr[`${curr.id}`] = curr;
 
+    if (prev === undefined){
+        console.log(prev, curr)
+        arr6[`${curr.id}`] = curr;
+        // arr.shift()
+        // if (arr[index - 1] !== null ){
+        //     arr.splice(index - 1, 1);
+        // }
+    } else {
+        // console.log(prev, curr)
+        arr6[`${prev.id}`] = prev;
+        arr6[`${curr.id}`] = curr;
+        // arr.shift();
+        // arr.shift();
+        // arr.splice(index - 1, 2);
+    }
 
-}, arr5)
+}, arr6)
+
+id(arr5)
+console.log(arr6)
+// console.log(arr5)
 
 
 
