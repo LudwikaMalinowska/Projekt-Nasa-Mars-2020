@@ -90,4 +90,17 @@ listaZakupow.reduce((prev, curr, index, arr) => {
 });
 console.log(listaZakupow)
 
+console.log("3.2:")
+const cenaNabial = listaZakupow.reduce((acc = 0, curr, index, arr) => {
+
+    if (curr.typ === "nabiał"){
+        acc += curr.cena
+    }
+    return acc
+}, 0)
+console.log(cenaNabial)
+
+// console.log("3.3:")
+
+
 
