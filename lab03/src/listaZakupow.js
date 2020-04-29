@@ -100,7 +100,24 @@ const cenaNabial = listaZakupow.reduce((acc = 0, curr, index, arr) => {
 }, 0)
 console.log(cenaNabial)
 
-// console.log("3.3:")
+console.log("3.3:")
+const produktyNaKg = listaZakupow.filter(n => n.jednostka === "kg")
 
+console.log(produktyNaKg.sort((n,m) =>  (n.produkt < m.produkt)))
+// ^ poprawić potem ^
+
+//zadanie 3.4
+console.log("3.4:")
+const znajdzProduktyTypu = (typ) => listaZakupow.filter(n => n.typ === typ)
+const owoceTansze10 = znajdzProduktyTypu("owoce")
+    .filter(n => n.cena < 10.0)
+// console.log(owoceTansze10)
+console.log(owoceTansze10.sort((a,b) => a.cena - b.cena))
+
+
+//zadanie 3.5
+console.log("3.5:")
+const prodNaSztuki = listaZakupow.filter(n => n.jednostka === "sztuk").map(n => n.produkt)
+console.log(prodNaSztuki)
 
 
