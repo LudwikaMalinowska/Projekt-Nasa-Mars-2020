@@ -43,18 +43,19 @@ function BookCreator(title, author) {
     b["author"]= author;
     b.print = function () {
         console.log(b.author + " - " + b.title)
-        // console.log("aaaaaa")
     };
+    return b;
 }
 
 const book3 = new BookCreator('Cień wiatru', 'Carlos Ruiz Zafon');
 const book4 = new BookCreator('Ojciech Chrzestny', 'Mario Puzo');
 
-console.log(book3);
-console.log(book4);
+// console.log(book3);
+// console.log(book4);
 
-// book3.print();
-// book4.print();
+console.log("\nbook 3 i book 4:")
+book3.print();
+book4.print();
 
 // ========================================
 // ZADANIE 2
