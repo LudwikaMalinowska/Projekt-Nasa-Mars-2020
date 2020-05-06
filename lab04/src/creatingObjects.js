@@ -36,19 +36,32 @@ book2.print = function () {
 
 book2.print();
 
-function BookCreator(title, author) {
-    const b = {};
-    //properties
-    b["title"]= title;
-    b["author"]= author;
-    b.print = function () {
-        console.log(b.author + " - " + b.title)
-    };
-    return b;
+function BookCreator(title, author, readers) {
+    // const b = {};
+    // //properties
+    // b.title= title;
+    // b.author= author;
+    //
+    // return b;
+    this.title = title;
+    this.author = author;
+    this.readers = readers;
 }
 
-const book3 = new BookCreator('Cień wiatru', 'Carlos Ruiz Zafon');
-const book4 = new BookCreator('Ojciech Chrzestny', 'Mario Puzo');
+BookCreator.prototype ={
+    print: function () {
+        console.log(this.author + " - " + this.title + " - czytelnicy: " + this.readers)
+    },
+    addReader: function () {
+        // this.readers = this.readers + 1;
+        this.readers += 1;
+    }
+}
+
+const book3 = new BookCreator('Cień wiatru', 'Carlos Ruiz Zafon', 2000);
+const book4 = new BookCreator('Ojciech Chrzestny', 'Mario Puzo', 5000);
+
+
 
 // console.log(book3);
 // console.log(book4);
@@ -56,6 +69,11 @@ const book4 = new BookCreator('Ojciech Chrzestny', 'Mario Puzo');
 console.log("\nbook 3 i book 4:")
 book3.print();
 book4.print();
+
+book3.addReader()
+console.log("\n book 3 po funkcji add reader")
+book3.print()
+// Carlos Ruiz Zafon - Cień wiatru - czytelnicy: 2001
 
 // ========================================
 // ZADANIE 2
@@ -152,6 +170,11 @@ person3.print();
 
 // Powróćmy do zadania 1. 
 // Dlaczego nasza funkcja BookCreator nie jest najlepszym rozwiązaniem do tworzenia obiektów?
+// w funkcji book creator pierw deklarujemy pusty obiekt, a potem do niego dodajemy
+// właściwości i funkcje print
+// utworzenie funkcje print jako wspólnej przyspieszy działanie kodu i będzie zajmować
+// mniej pamięci, w przypadku dużej liczby obiektów, bo nie będziemy musieli do każdego
+// z nich z osobna dodawać funkcji print
 
 // Zmodyfikuj funkcję BookCreator tak, aby inicjalizowała pola author i title. 
 // Funkcję print zadeklaruj jako wspólną dla wszystkich obiektów tworzonych przez BookCreator.
