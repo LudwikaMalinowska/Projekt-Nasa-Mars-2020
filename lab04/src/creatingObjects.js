@@ -203,3 +203,9 @@ console.log(book3.hasOwnProperty('isBestSeller'));
 // ========================================
 
 // Odwołaj się do zmiennej __proto__ w stworzonym obiekcie, co zawiera ta zmienna i do czego służy?
+console.log("\nZadanie 1.5, proto")
+console.log(book3.__proto__);
+console.log(book3)
+// zmienna __proto__ zawiera funkcje utworzone w prototypie obiektu
+// tzn. zawiera funkcje print i addReader, do których mają dostęp wszystkie obiekty
+// utworzone za pomocą book creator
