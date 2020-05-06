@@ -187,7 +187,15 @@ person3.print();
 
 // Na stworzonym obiekcie wywołaj funkcję hasOwnProperty('isBestseller'). 
 // ========================================
-// Napisz dlaczego nasz obiekt ma do niej dostęp. (jeśli wyskakuje błąd - powróć do poprzedniego zadania lub spytaj prowadzącego)
+// Napisz dlaczego nasz obiekt ma do niej dostęp. (jeśli wyskakuje błąd - powróć do
+// poprzedniego zadania lub spytaj prowadzącego)
+console.log("\nZadanie 1.4:")
+console.log("funkcja hasOwnProperty('isBestseller')")
+console.log(book3.hasOwnProperty('isBestSeller'));
+// każdy obiekt dziedziczący po obiekcie Object posiada metodę has own property.
+// dlatego też obiekt book3 również ją posiada
+
+
 
 
 // ========================================
