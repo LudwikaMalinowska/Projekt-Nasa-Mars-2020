@@ -16,14 +16,14 @@ const book = {
 
 const animals = ["dog", "cat", "rabbit", "hamster"];
 
-console.log(animals.__proto__ === Array.prototype);
-// console.log(animals.__proto__);
-// console.log(Array.prototype))
-console.log(animals.__proto__.__proto__ === Object.prototype);
-// console.log(animals.__proto__.__proto__)
-// console.log(Object.prototype)
-console.log(animals.__proto__.__proto__.__proto__ === null);
-// console.log(animals.__proto__.__proto__.__proto__);
+// console.log(animals.__proto__ === Array.prototype);
+// // console.log(animals.__proto__);
+// // console.log(Array.prototype))
+// console.log(animals.__proto__.__proto__ === Object.prototype);
+// // console.log(animals.__proto__.__proto__)
+// // console.log(Object.prototype)
+// console.log(animals.__proto__.__proto__.__proto__ === null);
+// // console.log(animals.__proto__.__proto__.__proto__);
 
 // 1.3. 
 // Co zostanie wyświetlone na ekranie w poniższym przykładzie?
@@ -38,8 +38,8 @@ dog.whatIs = function () {
     console.log("It's a " + this.whatIs());
 }
 
-// console.log(dog.__proto__ === Animal.prototype);
-// console.log(dog.__proto__ === cat.__proto__);
+// console.log(dog.__proto__ === Animal.prototype); //true
+// console.log(dog.__proto__ === cat.__proto__); //true
 
 // 1.4.
 // Stwórz obiekt za pomocą funkcji CreateMovie (zawierający klucze bez wartości: director, title, year) wykorzystując słówko `this`.
