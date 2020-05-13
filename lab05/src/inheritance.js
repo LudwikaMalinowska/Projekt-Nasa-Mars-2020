@@ -81,14 +81,28 @@ console.log(movie1.isOlder(2000))
 
 
 // 1.5.
-// Uzupełnij poniższy konstruktor o inicjalizację name, type i funkcję printInstrument. Funkcja printInstrument powinna być współdzielona między wszystkie utworzone obiekty.
+// Uzupełnij poniższy konstruktor o inicjalizację name, type i funkcję printInstrument. Funkcja
+// printInstrument powinna być współdzielona między wszystkie utworzone obiekty.
 
-//function CreateInstrument(name, type) {
-//    const instrument = Object.create(...);
-//
-//
-//    return instrument;
-//}
+const createInstrument = {};
+
+
+function CreateInstrument(name, type) {
+   const instrument = Object.create(createInstrument );
+   instrument.name = name;
+   instrument.type = type;
+
+    instrument.printInstrument = function () {
+        console.log(this.name + " - " + this.type)
+    }
+
+
+   return instrument;
+}
+
+
+const instr1 = new CreateInstrument("gitara", "instrumenty strunowe");
+instr1.printInstrument()
 
 // 1.6. 
 // Uzupełnij poniższy konstruktor, który tworzy obiekt dziedziczący po Instrument. Wykorzystaj do jego stworzenia konstruktor z zadania poprzedniego.
