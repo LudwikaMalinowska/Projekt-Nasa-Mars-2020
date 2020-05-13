@@ -28,15 +28,15 @@ const animals = ["dog", "cat", "rabbit", "hamster"];
 // 1.3. 
 // Co zostanie wyświetlone na ekranie w poniższym przykładzie?
 
-function Animal(animal) {
-    this.animal = animal;
-}
-
-var dog = new Animal('dog');
-var cat = new Animal('cat');
-dog.whatIs = function () {
-    console.log("It's a " + this.whatIs());
-}
+// function Animal(animal) {
+//     this.animal = animal;
+// }
+//
+// var dog = new Animal('dog');
+// var cat = new Animal('cat');
+// dog.whatIs = function () {
+//     console.log("It's a " + this.whatIs());
+// }
 
 // console.log(dog.__proto__ === Animal.prototype); //true
 // console.log(dog.__proto__ === cat.__proto__); //true
@@ -162,19 +162,53 @@ function StringedInstrument(stringsCount, name, type) {
 
 StringedInstrument.prototype = Object.create(Instrument.prototype);
 
-// a) Stwórz instancję StringedInstrument.
-
-const instr2 = new stringedInstrument(6, "gitara", "strunowe");
-console.log(instr2)
-
-// b) W jaki sposób odwołać się do metod printInstrument i printStringedInstrument?
+// // a) Stwórz instancję StringedInstrument.
 //
-instr2.printInstrument()
-instr2.printStringedInstrument()
-
-// c) Zastąp wywołanie call() funkcją apply() 
+// const instr2 = new stringedInstrument(6, "gitara", "strunowe");
+// console.log(instr2)
+//
+// // b) W jaki sposób odwołać się do metod printInstrument i printStringedInstrument?
+// //
+// instr2.printInstrument()
+// instr2.printStringedInstrument()
+//
+// // c) Zastąp wywołanie call() funkcją apply()
 
 // 1.8.
-// Utwórz obiekt Animal z polem 'name' i funkcją printName, po którym będą dziedziczyły Mammal (z polem age i funkcją getAge) i Fish (z polem weight i funkcją increaseWeight()) . 
-// Następnie stwórz kolejne obiekty - Dog (z polem breed i nadpisaniem funkcji getAge(), która tutaj będzie najpierw wywoływała funkcję getAge() z klasy dziedziczonej, a następnie mnożyła wynik razy 4 i wyświetlała go) i Salmon (z funkcją catch()), które będą dziedziczyły odpowiednio po Mammal i Fish.
+// Utwórz obiekt Animal z polem 'name' i funkcją printName, po którym będą dziedziczyły
+// Mammal (z polem age i funkcją getAge) i Fish (z polem weight i funkcją increaseWeight()) .
+// Następnie stwórz kolejne obiekty - Dog (z polem breed i nadpisaniem funkcji getAge(),
+// która tutaj będzie najpierw wywoływała funkcję getAge() z klasy dziedziczonej, a
+// następnie mnożyła wynik razy 4 i wyświetlała go) i Salmon (z funkcją catch()), które
+// będą dziedziczyły odpowiednio po Mammal i Fish.
 // W razie problemów wzoruj się na rozwiązaniu z poprzedniego zadania.
+
+console.log("\nZadanie 1.8:")
+
+function Animal(name) {
+    this.name = name;
+    this.printName = function () {
+        console.log(this.name);
+    }
+}
+
+function Mammal(name, age) {
+    const mammal = new Animal(name)
+    this.age = age;
+
+    this.getAge = () => this.age;
+}
+
+function Fish(name, weight) {
+    const fish = new Animal(name);
+    this.weight = weight;
+
+    this.increaseWeight = function (howMuch) {
+        this.weight += howMuch;
+    }
+}
+
+const cat1 = new Mammal("Kot", 3);
+const fish1 = new Fish("Ryba", 1);
+console.log(cat1)
+console.log(fish1)
