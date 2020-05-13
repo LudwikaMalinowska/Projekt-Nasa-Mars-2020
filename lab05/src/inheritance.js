@@ -105,20 +105,43 @@ const instr1 = new CreateInstrument("gitara", "instrumenty strunowe");
 instr1.printInstrument()
 
 // 1.6. 
-// Uzupełnij poniższy konstruktor, który tworzy obiekt dziedziczący po Instrument. Wykorzystaj do jego stworzenia konstruktor z zadania poprzedniego.
-// Zdefiniuj funkcję setStrings(number), która ustala liczbę strun w instrumencie (ta funkcja też powinna być współdzielona). NewStringInstrument powinien mieć też dostęp do funkcji, która znajduje się w Instrument.
-// Podpowiedź: aby zmienić wartość zmiennej __proto__ należy użyć - Object.setPrototypeOf(object, prototype) - należy użyć tej funkcji dwa razy w tym rozwiązaniu. 
+// Uzupełnij poniższy konstruktor, który tworzy obiekt dziedziczący po Instrument. Wykorzystaj do jego stworzenia
+// konstruktor z zadania poprzedniego.
+// Zdefiniuj funkcję setStrings(number), która ustala liczbę strun w instrumencie (ta funkcja też powinna być
+// współdzielona). NewStringInstrument powinien mieć też dostęp do funkcji, która znajduje się w Instrument.
+// Podpowiedź: aby zmienić wartość zmiennej __proto__ należy użyć - Object.setPrototypeOf(object, prototype) -
+// należy użyć tej funkcji dwa razy w tym rozwiązaniu.
 
-// function CreateStringedInstrument(name, type, stringsCount) {
-//     const newStringedInstrument = ...
+console.log("\nZadanie 1.6: ")
 
-//     return newStringedInstrument;
-// }
+function CreateStringedInstrument(name, type, stringsCount) {
 
 
-// const stringedInstrument = CreateStringedInstrument('gitara', 'strunowy', '3');
-// stringedInstrument.printInstrument();
-// stringedInstrument.setStrings(3);
+
+    const newStringedInstrument = new CreateInstrument(name, type);
+    newStringedInstrument.stringsCount = stringsCount;
+
+    // newStringedInstrument.setStrings = function (strings) {
+    //     this.stringsCount = strings;
+    // }
+
+    Object.setPrototypeOf(newStringedInstrument, {
+        setStrings: function (strings) {
+            this.stringsCount = strings;
+        },
+        printInstrument: newStringedInstrument.printInstrument
+    })
+
+
+    return newStringedInstrument;
+}
+
+
+const stringedInstrument = CreateStringedInstrument('gitara', 'strunowy', '3');
+console.log(stringedInstrument)
+stringedInstrument.printInstrument();
+stringedInstrument.setStrings(4);
+console.log(stringedInstrument)
 
 
 // 1.7. 
