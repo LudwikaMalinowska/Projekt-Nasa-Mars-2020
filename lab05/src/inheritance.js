@@ -42,10 +42,38 @@ dog.whatIs = function () {
 // console.log(dog.__proto__ === cat.__proto__); //true
 
 // 1.4.
-// Stwórz obiekt za pomocą funkcji CreateMovie (zawierający klucze bez wartości: director, title, year) wykorzystując słówko `this`.
+// Stwórz obiekt za pomocą funkcji CreateMovie (zawierający klucze bez wartości: director, title, year)
+// wykorzystując słówko `this`.
 // Jeśli przy tworzeniu obiektu rok nie zostanie podany powinien przyjmować wartość "unknown".
 
-//function CreateMovie(director, title, year)
+function CreateMovie(director, title, year) {
+    this.director = director;
+    this.title = title;
+    if (year){
+        this.year = year;
+    } else {
+        this.year = "unknown"
+    }
+
+    this.isOlder = (year) =>  {
+        // console.log(this.year, year)
+        if (this.year < year){
+            return true
+        } else {
+            return false
+        }
+    }
+
+    this.print = function () {
+        console.log(this.director + ": " + this.title + " (" + this.year + ")")
+    }
+
+}
+
+const movie1 = new CreateMovie("James Cameron","Titanic", 1997)
+console.log(movie1)
+movie1.print()
+console.log(movie1.isOlder(2000))
 
 // Następnie nie zmieniając implementacji funkcji CreateMovie, dodaj do niego metody: 
 // * isOlder(year) - zwracającą true/false w zależności od tego, czy podany film jest młodszy/starszy nić rok 2000.
