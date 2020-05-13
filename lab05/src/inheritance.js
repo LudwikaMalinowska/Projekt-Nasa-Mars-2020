@@ -136,7 +136,6 @@ function CreateStringedInstrument(name, type, stringsCount) {
     return newStringedInstrument;
 }
 
-
 const stringedInstrument = CreateStringedInstrument('gitara', 'strunowy', '3');
 console.log(stringedInstrument)
 stringedInstrument.printInstrument();
@@ -156,7 +155,8 @@ Instrument.prototype.printInstrument = function () {
     console.log("Instrument: " + name + ", typ: " + type);
 }
 function StringedInstrument(stringsCount, name, type) {
-    Instrument.call(this, name, type);
+    // Instrument.call(this, name, type);
+    Instrument.apply(this, [name, type]);
     this.stringsCount = stringsCount;
 }
 
@@ -164,7 +164,13 @@ StringedInstrument.prototype = Object.create(Instrument.prototype);
 
 // a) Stwórz instancję StringedInstrument.
 
+const instr2 = new stringedInstrument(6, "gitara", "strunowe");
+console.log(instr2)
+
 // b) W jaki sposób odwołać się do metod printInstrument i printStringedInstrument?
+//
+instr2.printInstrument()
+instr2.printStringedInstrument()
 
 // c) Zastąp wywołanie call() funkcją apply() 
 
