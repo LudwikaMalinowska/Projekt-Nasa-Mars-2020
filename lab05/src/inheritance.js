@@ -16,9 +16,14 @@ const book = {
 
 const animals = ["dog", "cat", "rabbit", "hamster"];
 
-// console.log(animals.__proto__ === ...);
-// console.log(animals.__proto__.__proto__ === ...);
-// console.log(animals.__proto__.__proto__.__proto__ === ...);
+console.log(animals.__proto__ === Array.prototype);
+// console.log(animals.__proto__);
+// console.log(Array.prototype))
+console.log(animals.__proto__.__proto__ === Object.prototype);
+// console.log(animals.__proto__.__proto__)
+// console.log(Object.prototype)
+console.log(animals.__proto__.__proto__.__proto__ === null);
+// console.log(animals.__proto__.__proto__.__proto__);
 
 // 1.3. 
 // Co zostanie wyświetlone na ekranie w poniższym przykładzie?
