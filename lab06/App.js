@@ -35,3 +35,11 @@ const ul2 = App2("newElement2", liTab)
 
 ReactDOM.render(ul2, div1);
 
+const button = React.createElement('button', {id: "btn"}, "Kliknij");
+
+ReactDOM.render(button, div1);
+
+const btn = document.getElementById("btn");
+btn.addEventListener('click', function () {
+    alert('Kliknięty');
+});
