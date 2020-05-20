@@ -9,23 +9,6 @@
 <body>
 <div id="1"></div>
 
-<script>
-
-    const div1 = document.getElementById("1");
-
-    const App = React.createElement('ul', {id: 'newElement'},
-        React.createElement('li', {}, 'Wiadomość'));
-    ReactDOM.render(App, div1);
-
-
-    const newUl = document.getElementById("newElement");
-    const newLi = [
-        React.createElement('li', {}, 'Wiadomość1'),
-        React.createElement('li', {}, 'Wiadomość2'),
-        React.createElement('li', {}, 'Wiadomość3'),
-        React.createElement('li', {}, 'Wiadomość4')
-        ]
-    ReactDOM.render(newLi, newUl);
-</script>
+<script src="App.js"></script>
 </body>
 </html>
