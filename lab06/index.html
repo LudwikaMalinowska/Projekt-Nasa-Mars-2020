@@ -10,10 +10,11 @@
 <div id="1"></div>
 
 <script>
-    
+
     const div1 = document.getElementById("1");
 
-    const App = React.createElement('ul', {}, React.createElement('li', {}, 'Wiadomość'));
+    const App = React.createElement('ul', {id: 'newElement'},
+        React.createElement('li', {}, 'Wiadomość'));
     ReactDOM.render(App, div1);
 </script>
 </body>
