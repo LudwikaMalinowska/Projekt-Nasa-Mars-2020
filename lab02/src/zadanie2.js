@@ -63,3 +63,17 @@ const findLess500 = (arr1, arr2) => arr1.reduce( (prev, curr) => {
 const arr3 = [];
 findLess500(wishlist, arr3);
 console.log(arr3);
+
+//Zadanie 2.6
+console.log("\nZadanie 2.6: ");
+const findEl = (arr1, el) => arr1.reduce( (prev, curr) => {
+    if (curr.name === el) {
+        return curr;
+    }
+    else if (prev !== undefined && prev.name === el){
+        return prev;
+    }
+});
+console.log(findEl(wishlist, 'Piekarnik'));
+console.log(findEl(wishlist, 'Czajnik'));
+console.log(findEl(wishlist, 'abc'));
