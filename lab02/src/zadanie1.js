@@ -37,12 +37,14 @@ indeksy(arr3)
 const arr4 = ['js', 'react', 'js', 'angular', 'angular', 'js']
 const powtozenia = (arr) => arr.reduce((prev, curr, index, arr) => {
 
-    // console.log(index + ": " + curr)
-    if (isNaN(dict[`${curr}`])) {
-        dict[`${curr}`] = 1
-    } else {
-        dict[`${curr}`] += 1
-    }
+    
+    // if (isNaN(dict[`${curr}`])) {
+    //     dict[`${curr}`] = 1
+    // } else {
+    //     dict[`${curr}`] += 1
+    // }
+    dict[`${curr}`] = (isNaN(dict[`${curr}`])) ?
+        dict[`${curr}`] = 1 : dict[`${curr}`] += 1;
 
 
 }, dict)
@@ -51,8 +53,10 @@ console.log("\nZadanie 1.4:")
 const dict = {}
 powtozenia(arr4)
 console.log(dict)
+console.log("\n\n")
 
 //zadanie 1.5
+
 const arr5 = [
     { id: 'abc', name: 'Ala' },
     { id: 'def', name: 'Tomek' },
@@ -106,7 +110,6 @@ const id = (arr) => arr.reduce((prev, curr, index, arr) => {
 id(arr5)
 console.log(arr6)
 // console.log(arr5)
-
 
 
 
