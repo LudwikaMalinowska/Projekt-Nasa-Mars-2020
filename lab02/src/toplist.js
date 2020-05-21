@@ -198,8 +198,8 @@ const queenSongs = [];
 findQueen(lp3, queenSongs);
 console.log(queenSongs);
 
-// Zadanie 3.1
-console.log("\nZadanie 3.1: ");
+// Zadanie 3.2
+console.log("\nZadanie 3.2: ");
 const findChange10 = (arr1, arr2) => arr1.reduce( (prev, curr) => {
    if (curr.change >= 10){
        arr2.push(curr)
@@ -208,3 +208,11 @@ const findChange10 = (arr1, arr2) => arr1.reduce( (prev, curr) => {
 const change10Songs = [];
 findChange10(lp3, change10Songs);
 console.log(change10Songs);
+
+// Zadanie 3.3
+console.log("\nZadanie 3.3: ");
+const sortFunction = (x,y) => x.change - y.change;
+const n = 5;
+const sortAndDelete = (arr1) => arr1.sort(sortFunction).splice(arr1.length - n, n);
+sortAndDelete(lp3);
+console.log(lp3)
