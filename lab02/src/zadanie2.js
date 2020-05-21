@@ -52,3 +52,14 @@ console.log("\nZadanie 2.4: ");
 const arr2 = [];
 wishlist.map( n => arr2[n.name] = n.netto);
 console.log(arr2);
+
+//Zadanie 2.5
+console.log("\nZadanie 2.5: ");
+const findLess500 = (arr1, arr2) => arr1.reduce( (prev, curr) => {
+    if (curr.netto < 500){
+        arr2.push(curr);
+    }
+}, []);
+const arr3 = [];
+findLess500(wishlist, arr3);
+console.log(arr3);
