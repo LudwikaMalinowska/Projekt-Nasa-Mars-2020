@@ -5,22 +5,18 @@ const sum = (arr) => arr.reduce((x, y) => x + y, 0)
 console.log(sum([1, 2, 3, 4, 5, 6, 7]))
 
 //1.2
-const delet = (arr) => arr.reduce((prev, curr, index, arr) => {
-    // console.log(curr)
-    if (curr < 0) {
-        arr.splice(index, 1);
-        curr = prev;
-        index = index - 1;
-    } else {
-        arr[index] = curr * curr;
+const delet = (arr1, arr2) => arr1.reduce((prev, curr) => {
+
+    if (curr > 0){
+        arr2.push(curr ** 2);
     }
 
-    return arr
-}, arr)
+}, [])
 
-const arr1 = [1, -2, 3, -4, 5, 6, 7]
-const arr2 = delet(arr1)
-console.log(arr2)
+const arr1 = [1, -2, 3, -4, 5, 6, 7];
+const result = []
+delet(arr1, result);
+console.log(result);
 
 //zad 1.3
 const indeksy = (arr) => arr.reduce((prev, curr, index, arr) => {
@@ -39,7 +35,7 @@ const powtozenia = (arr) => arr.reduce((prev, curr, index, arr) => {
 
     dict[`${curr}`] = (isNaN(dict[`${curr}`])) ?
         dict[`${curr}`] = 1 : dict[`${curr}`] += 1;
-    
+
 }, dict);
 
 console.log("\nZadanie 1.4:");
