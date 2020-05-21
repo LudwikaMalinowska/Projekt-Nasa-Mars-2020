@@ -46,3 +46,9 @@ const nazwaCena = (arr1, arr2) => arr1.reduce( (prev, curr) => {
 const arr1 = [];
 nazwaCena(wishlist, arr1);
 console.log(arr1);
+
+//Zadanie 2.4
+console.log("\nZadanie 2.4: ");
+const arr2 = [];
+wishlist.map( n => arr2[n.name] = n.netto);
+console.log(arr2);
