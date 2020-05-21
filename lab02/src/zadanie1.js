@@ -34,26 +34,19 @@ console.log(arr3);
 indeksy(arr3);
 
 //zadanie 1.4
-const arr4 = ['js', 'react', 'js', 'angular', 'angular', 'js']
+const arr4 = ['js', 'react', 'js', 'angular', 'angular', 'js'];
 const powtozenia = (arr) => arr.reduce((prev, curr, index, arr) => {
 
-
-    // if (isNaN(dict[`${curr}`])) {
-    //     dict[`${curr}`] = 1
-    // } else {
-    //     dict[`${curr}`] += 1
-    // }
     dict[`${curr}`] = (isNaN(dict[`${curr}`])) ?
         dict[`${curr}`] = 1 : dict[`${curr}`] += 1;
+    
+}, dict);
 
-
-}, dict)
-
-console.log("\nZadanie 1.4:")
-const dict = {}
-powtozenia(arr4)
-console.log(dict)
-console.log("\n\n")
+console.log("\nZadanie 1.4:");
+const dict = {};
+powtozenia(arr4);
+console.log(dict);
+console.log("\n\n");
 
 //zadanie 1.5
 
