@@ -28,3 +28,12 @@ const countList = (arr1) => arr1.reduce( (prev, curr) => {
 }, 0);
 const listPrice = countList(wishlist);
 console.log(listPrice.toFixed(2));
+
+//Zadanie 2.2
+console.log("Zadanie 2.2: ");
+const objectToPrices = (arr1, arr2) => arr1.reduce( (prev, curr) => {
+    arr2.push(curr.netto);
+}, []);
+const ceny = [];
+objectToPrices(wishlist, ceny);
+console.log(ceny);
