@@ -197,3 +197,14 @@ const findQueen = (arr1, arr2) => arr1.reduce( (prev, curr) => {
 const queenSongs = [];
 findQueen(lp3, queenSongs);
 console.log(queenSongs);
+
+// Zadanie 3.1
+console.log("\nZadanie 3.1: ");
+const findChange10 = (arr1, arr2) => arr1.reduce( (prev, curr) => {
+   if (curr.change >= 10){
+       arr2.push(curr)
+   }
+}, []);
+const change10Songs = [];
+findChange10(lp3, change10Songs);
+console.log(change10Songs);
