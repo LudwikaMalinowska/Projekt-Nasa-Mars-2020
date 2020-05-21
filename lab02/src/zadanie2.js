@@ -37,3 +37,12 @@ const objectToPrices = (arr1, arr2) => arr1.reduce( (prev, curr) => {
 const ceny = [];
 objectToPrices(wishlist, ceny);
 console.log(ceny);
+
+//Zadanie 2.3
+console.log("Zadanie 2.3: ");
+const nazwaCena = (arr1, arr2) => arr1.reduce( (prev, curr) => {
+   arr2[curr.name] = curr.netto;
+}, []);
+const arr1 = [];
+nazwaCena(wishlist, arr1);
+console.log(arr1);
