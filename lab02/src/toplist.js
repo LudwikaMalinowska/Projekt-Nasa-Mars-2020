@@ -264,7 +264,6 @@ wypiszNRazy(3, 1, 10);
 
 // Zadanie 3.7
 console.log("\nZadanie 3.7: ");
-
 const wypisz = (arr1, number = 1) => {
 
     if (number > 10)
@@ -276,8 +275,7 @@ const wypisz = (arr1, number = 1) => {
 
     wypisz(arr1, number + 1)
 }
-// setInterval(wypisz, 5000);
-wypisz(lp3)
+// wypisz(lp3)
 
 // Zadanie 3.8
 console.log("\nZadanie 3.8: ");
@@ -288,3 +286,16 @@ const spadek = (arr1, arr2) => arr1.map(n => {
 });
 spadek(lp3, spadekNaLiscie);
 console.log(spadekNaLiscie);
+
+// Zadanie 3.9
+console.log("\nZadanie 3.9: ");
+const lista = {}
+const nazwaKlucz = (arr1, arr2) => {
+    arr1.forEach(n => {
+        arr2[n.song] = n;
+    })
+};
+nazwaKlucz(lp3, lista);
+console.log(lista);
+
+
