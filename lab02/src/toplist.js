@@ -278,3 +278,13 @@ const wypisz = (arr1, number = 1) => {
 }
 // setInterval(wypisz, 5000);
 wypisz(lp3)
+
+// Zadanie 3.8
+console.log("\nZadanie 3.8: ");
+const spadekNaLiscie = [];
+const spadek = (arr1, arr2) => arr1.map(n => {
+    if (n.change < 0)
+        arr2.push(n)
+});
+spadek(lp3, spadekNaLiscie);
+console.log(spadekNaLiscie);
