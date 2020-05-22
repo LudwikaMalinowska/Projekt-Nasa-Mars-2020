@@ -261,3 +261,20 @@ const wypiszNRazy = (n, min, max) => {
     }
 };
 wypiszNRazy(3, 1, 10);
+
+// Zadanie 3.7
+console.log("\nZadanie 3.7: ");
+
+const wypisz = (arr1, number = 1) => {
+
+    if (number > 10)
+        return 0;
+    else if (number === 1)
+        console.log(arr1.find(n => n.place === number))
+    else
+        setTimeout(() => console.log(arr1.find(n => n.place === number)), 5000 * number)
+
+    wypisz(arr1, number + 1)
+}
+// setInterval(wypisz, 5000);
+wypisz(lp3)
