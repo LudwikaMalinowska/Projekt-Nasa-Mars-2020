@@ -230,3 +230,17 @@ const get1stPlace = (arr1, arr2) => arr1.map(n => {
 get1stPlace(lp3sorted, firstPlace);
 console.log(firstPlace);
 // console.log(lp3sorted);
+
+// Zadanie 3.5
+console.log("\nZadanie 3.5: ");
+const liczby = ["a",2,3,5,6,8,9]
+const wyswietlUtwory = (arr1, arr2) => {
+
+    arr2.forEach(_ =>{
+            if (isFinite(_)){
+                const song = arr1.find(x => x.place === _)
+                console.log(song)
+            }
+    })
+}
+wyswietlUtwory(lp3, liczby)
