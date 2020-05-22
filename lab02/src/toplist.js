@@ -217,3 +217,16 @@ const lp3sorted = [...lp3]
 const sortAndDelete = (arr1) => arr1.sort(sortFunction).splice(arr1.length - n, n);
 sortAndDelete(lp3sorted);
 console.log(lp3sorted);
+
+// Zadanie 3.4
+console.log("\nZadanie 3.4: ");
+const firstPlace = {}
+const get1stPlace = (arr1, arr2) => arr1.map(n => {
+    if (n.place === 1){
+        arr2['author'] = n.author;
+        arr2['song'] = n.song;
+    }
+});
+get1stPlace(lp3sorted, firstPlace);
+console.log(firstPlace);
+// console.log(lp3sorted);
