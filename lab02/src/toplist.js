@@ -299,3 +299,17 @@ nazwaKlucz(lp3, lista);
 console.log(lista);
 
 
+// Zadanie 3.10
+console.log("\nZadanie 3.10: ");
+const lista2 = {}
+const zespolKlucz = (arr1, arr2) => {
+    arr1.forEach(n => {
+        if (!arr2.hasOwnProperty(n.author)){
+            arr2[n.author] = [{ song: n.song, place: n.place }]
+        } else {
+            arr2[n.author].push({ song: n.song, place: n.place })
+        }
+    })
+};
+zespolKlucz(lp3, lista2);
+console.log(lista2);
