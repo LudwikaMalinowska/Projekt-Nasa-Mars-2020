@@ -244,3 +244,20 @@ const wyswietlUtwory = (arr1, arr2) => {
     })
 }
 wyswietlUtwory(lp3, liczby)
+
+// Zadanie 3.6
+console.log("\nZadanie 3.6: ");
+const wypiszNRazy = (n, min, max) => {
+
+
+    const randomInt = (min, max) => {
+        return min + Math.floor((max - min) * Math.random());
+    }
+    const random = randomInt(min, max);
+    console.log("Utwór nr: " + random)
+
+    for (let i = 0; i < n; i++){
+        console.log(lp3.find(n => n.place === random));
+    }
+};
+wypiszNRazy(3, 1, 10);
