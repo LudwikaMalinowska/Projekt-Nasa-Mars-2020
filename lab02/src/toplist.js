@@ -213,6 +213,7 @@ console.log(change10Songs);
 console.log("\nZadanie 3.3: ");
 const sortFunction = (x,y) => x.change - y.change;
 const n = 5;
+const lp3sorted = [...lp3]
 const sortAndDelete = (arr1) => arr1.sort(sortFunction).splice(arr1.length - n, n);
-sortAndDelete(lp3);
-console.log(lp3)
+sortAndDelete(lp3sorted);
+console.log(lp3sorted);
