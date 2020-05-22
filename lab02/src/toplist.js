@@ -326,3 +326,22 @@ const count = (arr1, arr2) => arr1.forEach(n => {
 const czestosc = {};
 count(lp3, czestosc);
 console.log(czestosc);
+
+// Zadanie 3.12
+console.log("\nZadanie 3.12: ");
+const minmax = (arr1, arr2) => arr1.forEach(n => {
+    if (!arr2.hasOwnProperty("min") && !arr2.hasOwnProperty("max")) {
+        arr2["min"] = n.change;
+        arr2["max"] = n.change;
+    }
+    else {
+        if (n.change < arr2["min"])
+            arr2["min"] = n.change;
+        if (n.change > arr2["max"])
+            arr2["max"] = n.change;
+    }
+});
+const minimaxi = {};
+minmax(lp3, minimaxi);
+console.log(minimaxi);
+
