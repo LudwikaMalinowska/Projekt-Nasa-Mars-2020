@@ -48,9 +48,12 @@ const {
     year2 = "-",
 } = book2;
 
-// console.log(title2);
-// console.log(author2);
-// console.log(year2);
+console.log(title2);
+console.log(author2);
+console.log(year2);
+// Mistrz i Małgorzata
+// Michaił Bułhakow
+// 1967
 
 // 4
 const book3 = {
