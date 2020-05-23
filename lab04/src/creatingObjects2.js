@@ -55,12 +55,39 @@ book5.addReader()
 book5.print()
 
 // 3. Znasz już wiele sposób na stworzenie obiektu. Dlaczego więc nie użyć arrow function?
-// Uzupełnij poniższy kod o inicjalizację pola name i age. Dodaj wewnąrz funkcję addAge, która inkrementuje wiek. 
+// Uzupełnij poniższy kod o inicjalizację pola name i age. Dodaj wewnąrz funkcję addAge,
+// która inkrementuje wiek.
 
-const Person = name => ({
-    // inicjalizacja
-})
+const Person = (name, age) => ({
+    name: name,
+    age:  age,
+
+    addAge: () => {
+        this.age += 1;
+    },
+
+});
+
+const person1 = Person("Jan", 20);
+person1.addAge();
+console.log(person1);
+
+// Person.prototype = {
+//     print: function () {
+//         console.log("Imię: " + name + " Wiek: " + age);
+//     }
+// }
+//
+// person1.print();
 
 
-// Przetestuj działanie tak stworzonego obiektu, korzystając z wiedzy, którą już masz. Jakie są róznice pomiędzy stworzeniem obiektu za pomocą poprzednich metod?
+
+// Przetestuj działanie tak stworzonego obiektu, korzystając z wiedzy, którą już masz. Jakie
+// są róznice pomiędzy stworzeniem obiektu za pomocą poprzednich metod?
 // (przetestuj prototype, new itd.)
+
+//const person1 = new Person("Jan", "Kowalski");
+//person nie jest konstruktorem, nie da się wywołać z new,
+// nie działa również prototype
+// funkcja strzałkowa nie ma własnego this, dlatego inicjalizacja zmiennej name
+// nie może nastąpić przez this.name, tylko name: name
