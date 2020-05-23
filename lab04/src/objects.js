@@ -26,9 +26,13 @@ const {
         year1 = 1967,
 } = book1;
 
-// console.log(title1);
-// console.log(author1);
-// console.log(year1);
+console.log(title1);
+console.log(author1);
+console.log(year1);
+// title1 = "Mistrz i Małgorzata"
+// author1 = "Michaił Bułhakow"
+// year1 = 1967
+
 
 // 3
 
