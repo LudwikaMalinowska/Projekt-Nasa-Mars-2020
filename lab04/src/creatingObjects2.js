@@ -29,8 +29,30 @@ BookCreator.prototype ={
 }
 
 
-// 2. Tworzymy alternatywną wersję powyższego kodu. Użyj słów kluczowych class i constructor, aby osiągnąć powyższy efekt.
+// 2. Tworzymy alternatywną wersję powyższego kodu. Użyj słów kluczowych class
+// i constructor, aby osiągnąć powyższy efekt.
 
+const BookCreator2 = class {
+    constructor(title, author, readers) {
+        this.title = title;
+        this.author = author;
+        this.readers = readers;
+    }
+
+    print() {
+        console.log(this.author + " - " + this.title + " - czytelnicy: " + this.readers)
+    }
+    addReader() {
+        this.readers += 1;
+    }
+
+}
+
+const book5 = new BookCreator2('Cień wiatru', 'Carlos Ruiz Zafon', 2000);
+const book6 = new BookCreator2('Ojciech Chrzestny', 'Mario Puzo', 5000);
+
+book5.addReader()
+book5.print()
 
 // 3. Znasz już wiele sposób na stworzenie obiektu. Dlaczego więc nie użyć arrow function?
 // Uzupełnij poniższy kod o inicjalizację pola name i age. Dodaj wewnąrz funkcję addAge, która inkrementuje wiek. 
