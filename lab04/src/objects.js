@@ -56,6 +56,7 @@ console.log(year2);
 // 1967
 
 // 4
+console.log("\nZadanie 4:")
 const book3 = {
     title3: "Mistrz i Małgorzata",
     author3: "Michaił Bułhakow",
@@ -64,8 +65,8 @@ const book3 = {
 
 const { title3, ...bookWithoutTitle } = book3;
 
-// console.log(title3);
-// console.log(bookWithoutTitle);
+console.log(title3); //Mistrz i Małgorzata
+console.log(bookWithoutTitle); //{ author3: 'Michaił Bułhakow', year3: 1967 }
 
 // =======================
 // Wykorzystując wszystkie informacje zawarte powyżej stwórz obiekt
@@ -75,11 +76,26 @@ const { title3, ...bookWithoutTitle } = book3;
 // Director: Frank Darabont 
 // Year: 1999
 // Genre: Dramat
-const movie1 = {}
+const movie1 = {
+    Country: "USA",
+    Title: "Zielona Mila",
+    Director: "Frank Darabont",
+    Year: 1999,
+    Genre: "Dramat",
+}
 
-// Następnie wykorzystując zabieg przedstawiony w powyższych przykładach zmodyfikuj obiekt tak, aby po wyświetleniu obiektu dostać następujący output:
+// Następnie wykorzystując zabieg przedstawiony w powyższych przykładach zmodyfikuj
+// obiekt tak, aby po wyświetleniu obiektu dostać następujący output:
 // console.log(newMovie1);
 // Output: { title: 'Zielona Mila', director: 'Frank Darabont' }
+const {Country = "-",
+    Title = "-",
+    Director = "-",
+    Year = "-",
+    Genre = "-" } = movie1;
+
+const newMovie1 = {Title, Director};
+console.log(newMovie1);
 
 // 5
 // Stwórz teraz bardziej skomplikowany obiekt zawierający m.in tablicę i inny obiekt. Powiedzmy, że zawiera np. 
