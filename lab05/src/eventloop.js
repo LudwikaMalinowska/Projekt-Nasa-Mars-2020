@@ -26,8 +26,15 @@ function start() {
     }, 2000);
 }
 
-start()
+// start()
 // Zadanie 2.3. Napisz funkcję, która wypisuje 'Welcome' co sekundę w nieskończoność.
+function welcomeInfinity() {
+    setInterval(() => {
+        console.log("Welcome")
+    }, 1000)
+}
+
+welcomeInfinity()
 
 // Zadanie 2.4. Napisz funkcję, która wypisuje 'Welcome' co sekundę, ale tylko przez 5 sekund. Podpowiedź: (użyj clearInterval)
 
