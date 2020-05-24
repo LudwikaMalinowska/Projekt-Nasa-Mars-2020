@@ -4,24 +4,46 @@
 // po 5 sekundach i zwróci string 'Udało się!'.
 // Jako callback niech wypisze zwrócony string w konsoli.
 
+// const prom = new Promise( (resolve, reject) => {
+//     const waitTo = new Date().getTime() + 5000;
+//     while(waitTo > new Date().getTime()) {}
+//
+//
+//     // return resolve("Udało się!");
+//
+// })
+//
+// function resolved(message) {
+//     console.log(message);
+// }
+//
+// prom.then(resolved);
+
+
+
+// 3.2 Zmodyfikuj powyższy kod tak, aby zamiast z sukcesem - promise
+// zakończył się porażką i zwracał string 'Porażka'.
+// Skorzystaj z then() aby obsłużyć błąd.
+
 const prom = new Promise( (resolve, reject) => {
     const waitTo = new Date().getTime() + 5000;
     while(waitTo > new Date().getTime()) {}
 
-    // return resolve();
-    return resolve("Udało się!");
+
+    // return resolve("Udało się!");
+    return reject("Porażka")
 })
 
 function resolved(message) {
     console.log(message);
 }
 
-prom.then(resolved);
+function rejected(message) {
+    console.log(message);
+}
 
+prom.then(resolved).catch(rejected);
 
-
-// 3.2 Zmodyfikuj powyższy kod tak, aby zamiast z sukcesem - promise zakończył się porażką i zwracał string 'Porażka'.
-// Skorzystaj z then() aby obsłużyć błąd.
 
 // 3.3 Zamiast then(), zmodyfikuj powyższy kod używając catch()
 
