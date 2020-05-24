@@ -52,30 +52,50 @@
 // W przeciwnym przypadku zwraca iloczyn dwóch liczb. Napisz callback, który wypisuje wynik
 // w konsoli.
 
-function multiplyAsync(x,y) {
-    return new Promise( (resolve, reject) => {
-        if (typeof x !== "number" || typeof y !== "number"){
-            return reject("Porażka.")
-        } else {
-            return resolve(x*y)
-        }
-        }
-    )
+// function multiplyAsync(x,y) {
+//     return new Promise( (resolve, reject) => {
+//         if (typeof x !== "number" || typeof y !== "number"){
+//             return reject("Porażka.")
+//         } else {
+//             return resolve(x*y)
+//         }
+//         }
+//     )
+// }
+//
+// function resolved(message) {
+//     console.log(message);
+// }
+//
+// function rejected(message) {
+//     console.log(message);
+// }
+//
+// multiplyAsync(5, 2).then(resolved).catch(rejected);
+
+// 3.5 Dołącz axios do projektu. Wykonaj funkcję get dla następującego url:
+// https://jsonplaceholder.typicode.com/posts.
+// Jako pierwszy callback - sprawdź czy response jest poprawny (status równy 200).
+// Jeśli tak, to zwróć response, w przeciwnym wypadku wypisz błąd w konsoli.
+// Jako następny callback - użyj destrukcji obiektów, aby wypisać w konsoli zmienną
+// 'data' i 'headers'.
+
+const axios = require('axios');
+const jsonPlaceholderPromise = axios.get('https://jsonplaceholder.typicode.com/posts');
+
+function resolved(response) {
+    if (response.status === 200){
+        // console.log(response)
+        return response;
+    }
+}
+function rejected(response) {
+    if (response.status !== 200){
+        console.log("Błąd");
+    }
 }
 
-function resolved(message) {
-    console.log(message);
-}
-
-function rejected(message) {
-    console.log(message);
-}
-
-multiplyAsync(5, 2).then(resolved).catch(rejected);
-
-// 3.5 Dołącz axios do projektu. Wykonaj funkcję get dla następującego url: https://jsonplaceholder.typicode.com/posts. 
-// Jako pierwszy callback - sprawdź czy response jest poprawny (status równy 200). Jeśli tak, to zwróć response, w przeciwnym wypadku wypisz błąd w konsoli.
-// Jako następny callback - użyj destrukcji obiektów, aby wypisać w konsoli zmienną 'data' i 'headers'.
+jsonPlaceholderPromise.then(resolved).catch(rejected);
 
 /* 3.6 Stwórz funkcję, która przyjmuje jako parametr obiekt takiej postaci:
 {
