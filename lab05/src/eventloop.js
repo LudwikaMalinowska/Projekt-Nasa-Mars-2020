@@ -34,9 +34,25 @@ function welcomeInfinity() {
     }, 1000)
 }
 
-welcomeInfinity()
+// welcomeInfinity()
 
-// Zadanie 2.4. Napisz funkcję, która wypisuje 'Welcome' co sekundę, ale tylko przez 5 sekund. Podpowiedź: (użyj clearInterval)
+// Zadanie 2.4. Napisz funkcję, która wypisuje 'Welcome' co sekundę, ale tylko przez
+// 5 sekund. Podpowiedź: (użyj clearInterval)
+
+function hello5() {
+    const end = new Date().getTime() + 5000;
+
+    const interval = setInterval(() => {
+        console.log("Welcome")
+        // console.log(new Date().getTime() > end)
+        if (new Date().getTime() > end){
+            clearInterval(interval)
+        }
+    }, 1000)
+    // console.log(interval)
+}
+
+hello5()
 
 // Zadanie 2.5. Napisz funkcję, która przyjmuje trzy argumenty: funkcję i dwie liczby. Funkcja będzie wywołała podaną w argumencie funkcję co x milisekund i automatycznie zatrzyma się po upływie y milisekund.
 
