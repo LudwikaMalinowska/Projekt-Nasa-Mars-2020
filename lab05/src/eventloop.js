@@ -9,16 +9,24 @@ function helloWorld() {
     console.log('Hello world!');
 }
 
-setTimeout(() => {
-    helloWorld()
-}, 1000);
+// setTimeout(() => {
+//     helloWorld()
+// }, 1000);
+//
+//
+//
+// console.log('No, hello universe!');
 
+// Zadanie 2.2. Napisz funkcję, która wypisuje w konsoli 'Start!' i po dwóch sekundach
+// wypisuje 'Koniec'.
+function start() {
+    console.log("Start");
+    setTimeout(() => {
+        console.log("Koniec");
+    }, 2000);
+}
 
-
-console.log('No, hello universe!');
-
-// Zadanie 2.2. Napisz funkcję, która wypisuje w konsoli 'Start!' i po dwóch sekundach wypisuje 'Koniec'.
-
+start()
 // Zadanie 2.3. Napisz funkcję, która wypisuje 'Welcome' co sekundę w nieskończoność.
 
 // Zadanie 2.4. Napisz funkcję, która wypisuje 'Welcome' co sekundę, ale tylko przez 5 sekund. Podpowiedź: (użyj clearInterval)
