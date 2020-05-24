@@ -187,28 +187,74 @@ console.log("\nZadanie 1.8:")
 
 function Animal(name) {
     this.name = name;
-    this.printName = function () {
-        console.log(this.name);
-    }
+
 }
+
+Animal.prototype.printName = function () {
+    console.log(this.name);
+}
+
 
 function Mammal(name, age) {
-    const mammal = new Animal(name)
+    Animal.call(this, name);
     this.age = age;
 
-    this.getAge = () => this.age;
+}
+Mammal.prototype = Object.create(Animal.prototype);
+Mammal.prototype.constructor = Mammal;
+Mammal.prototype.getAge = function () {
+    return this.age;
 }
 
+
 function Fish(name, weight) {
-    const fish = new Animal(name);
+    Animal.call(this, name)
     this.weight = weight;
 
-    this.increaseWeight = function (howMuch) {
-        this.weight += howMuch;
-    }
+}
+Fish.prototype = Object.create(Animal.prototype);
+Fish.prototype.constructor = Fish;
+Fish.prototype.increaseWeight = function (howMuch) {
+    this.weight += howMuch;
 }
 
 const cat1 = new Mammal("Kot", 3);
 const fish1 = new Fish("Ryba", 1);
 console.log(cat1)
 console.log(fish1)
+
+
+function Dog(name, age, breed) {
+    // const dog = new Mammal(name, age);
+    Mammal.call(this, name, age);
+    this.breed = breed;
+
+}
+Dog.prototype = Object.create(Mammal.prototype);
+Dog.prototype.constructor = Dog;
+Dog.prototype.getAge = function () {
+    return Mammal.prototype.getAge.call(this) * 4;
+}
+
+console.log("Dog: ")
+const dog1 = new Dog("Pieseł", 2, "Shiba Inu");
+console.log(dog1);
+console.log(dog1.getAge());
+
+
+function Salmon(name, weight) {
+    // const salmon = new Fish(name, weight);
+    Fish.call(this, name, weight);
+
+}
+Salmon.prototype = Object.create(Fish.prototype);
+Salmon.prototype.constructor = Salmon;
+Salmon.prototype.catch = () => {
+    console.log("Złapano łososia.")
+}
+
+console.log("Salmon: ")
+const salmon1 = new Salmon("Losos", 1);
+salmon1.increaseWeight(0.1);
+console.log(salmon1);
+salmon1.catch();
