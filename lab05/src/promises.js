@@ -81,21 +81,21 @@
 // 'data' i 'headers'.
 
 const axios = require('axios');
-const jsonPlaceholderPromise = axios.get('https://jsonplaceholder.typicode.com/posts');
-
-function resolved(response) {
-    if (response.status === 200){
-        // console.log(response)
-        return response;
-    }
-}
-function rejected(response) {
-    if (response.status !== 200){
-        console.log("Błąd");
-    }
-}
-
-jsonPlaceholderPromise.then(resolved).catch(rejected);
+// const jsonPlaceholderPromise = axios.get('https://jsonplaceholder.typicode.com/posts');
+//
+// function resolved(response) {
+//     if (response.status === 200){
+//         // console.log(response)
+//         return response;
+//     }
+// }
+// function rejected(response) {
+//     if (response.status !== 200){
+//         console.log("Błąd");
+//     }
+// }
+//
+// jsonPlaceholderPromise.then(resolved).catch(rejected);
 
 /* 3.6 Stwórz funkcję, która przyjmuje jako parametr obiekt takiej postaci:
 {
@@ -104,6 +104,31 @@ jsonPlaceholderPromise.then(resolved).catch(rejected);
     completed: (pole typu boolean)
 }
 
-Następnie wysyła taki obiekt za pomocą funkcji post z biblioteki axios pod url: https://jsonplaceholder.typicode.com/todos.
-Jeśli dodanie zakończy się sukcesem - wyświetli w konsoli komunikat 'Dodano' i wyświetli id dodanego obiektu. W przeciwnym wypadku wypisze błąd.
+Następnie wysyła taki obiekt za pomocą funkcji post z biblioteki axios pod url:
+https://jsonplaceholder.typicode.com/todos.
+Jeśli dodanie zakończy się sukcesem - wyświetli w konsoli komunikat 'Dodano' i
+wyświetli id dodanego obiektu. W przeciwnym wypadku wypisze błąd.
 */
+
+const obj1 = {
+    idUser: 11,
+    title: "aaa",
+    completed: true,
+}
+
+function f1(obj) {
+
+    const jsonPlaceholderPromise = axios.post('https://jsonplaceholder.typicode.com/todos',
+        obj);
+    jsonPlaceholderPromise.then(resolved).catch(rejected);
+}
+
+function resolved(response) {
+        console.log("Dodano");
+}
+function rejected(response) {
+        console.log("Błąd");
+}
+
+f1(obj1);
+
