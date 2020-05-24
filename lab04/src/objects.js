@@ -98,18 +98,37 @@ const newMovie1 = {Title, Director};
 console.log(newMovie1);
 
 // 5
+console.log("\nZadanie 5: ")
 // Stwórz teraz bardziej skomplikowany obiekt zawierający m.in tablicę i inny obiekt. Powiedzmy, że zawiera np. 
 // Title: Nietykalni
 // Directors: Olivier Nakache, Éric Toledano
 // Country: Francja
 // Year: 2011
 // Actors: Philippe: François Cluzet, Dris: Omar Sy, Yvonne: Anne Le Ny, ...
-const movie2 = {}
+
+const movie2 = {
+    // Title: "Nietykalni",
+    // Directors: ["Olivier Nakache", "Éric Toledano"],
+    Country: "Francja",
+    Year: 2011,
+    // Actors: {Philippe: "François Cluzet", Dris: "Omar Sy", Yvonne: "Anne Le Ny"},
+}
 
 //Następnie odwzoruj wygląd stworzonej struktury obiektu i wykonaj na nim poniższe operacje 
 
-// console.log(title); // Nietykalni
-// console.log(director1); // Olivier Nakache
-// console.log(DrisRole); // Omar Sy
+const {
+    Title: title = "Movie Title",
+    Directors: [director1, director2] = ["Director 1", "Director 2"],
+    Country: country = "Country",
+    Year: year = "unknown",
+    // Actors: {Philippe: PhilippeRole, Dris: DrisRole, Yvonne: YvonneRole}
+    Actors: {Philippe: PhilippeRole, Dris: DrisRole, Yvonne: YvonneRole} =
+        {Philippe: "Actor 1", Dris: "Actor 2", Yvonne: "Actor 3"}
+} = movie2;
+
+console.log(title); // Nietykalni
+console.log(director1); // Olivier Nakache
+console.log(DrisRole); // Omar Sy
+
 
 //Zmodyfikuj teraz swój kod, aby zawierał domyślne wartości, jeśli którakolwiek z własności filmu nie została podana.
