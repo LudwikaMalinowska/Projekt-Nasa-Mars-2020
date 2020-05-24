@@ -52,9 +52,26 @@ function hello5() {
     // console.log(interval)
 }
 
-hello5()
+// hello5()
 
-// Zadanie 2.5. Napisz funkcję, która przyjmuje trzy argumenty: funkcję i dwie liczby. Funkcja będzie wywołała podaną w argumencie funkcję co x milisekund i automatycznie zatrzyma się po upływie y milisekund.
+// Zadanie 2.5. Napisz funkcję, która przyjmuje trzy argumenty: funkcję i dwie
+// liczby. Funkcja będzie wywołała podaną w argumencie funkcję co x milisekund i
+// automatycznie zatrzyma się po upływie y milisekund.
 
+function f2() {
+    console.log("Hello world")
+}
+
+function f1(fun, timeout, endAfter) {
+    const start = new Date().getTime();
+    const interval1 = setInterval(() => {
+        fun();
+        if (new Date().getTime() > start + endAfter){
+            clearInterval(interval1);
+        }
+    }, timeout);
+}
+
+f1(f2, 500, 2000);
   
   
