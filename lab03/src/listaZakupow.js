@@ -147,3 +147,22 @@ const printGrouped = (list) => {
 };
 printGrouped(listaZakupow);
 
+//zadanie 3.7
+console.log("3.7:");
+// const najdrozszy = _.maxBy(lista2, ["cena"])
+const ceny = lista2.reduce( (acc, curr) => {
+    // console.log(acc)
+    acc.push(parseFloat(curr.cena))
+    return acc
+}, []);
+// console.log(ceny)
+const naj = ceny.reduce( (acc, curr) => {
+    return (acc - curr > 0) ? acc : curr;
+}, 0);
+console.log("Cena najdroższego produktu: " + naj)
+// const najdrozszy = _.max(ceny)
+// console.log(najdrozszy)
+// console.log(lista2)
+// const najCena = najdrozszy.cena;
+const tansze = lista2.filter(n => n.cena < naj);
+console.log(tansze)
