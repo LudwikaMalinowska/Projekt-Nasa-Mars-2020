@@ -1,13 +1,11 @@
 "use strict";
-const _ = require('lodash');
 
-const fun1 = (arr, length, arr2) => arr.reduce( (acc, curr, index) => {
+const fun1 = (arr, length) => arr.reduce( (acc, curr, index) => {
 
-    // console.log(index)
-    if (index % 3 === 0)
+    if (index % length === 0)
         return [...acc, [curr]];
     else {
-        const i = Math.floor(index / 3);
+        const i = Math.floor(index / length);
         acc[i].push(curr);
         return acc;
     }
