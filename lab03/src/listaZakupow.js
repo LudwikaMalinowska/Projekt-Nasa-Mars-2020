@@ -94,15 +94,15 @@ const lista2 = listaZakupow.reduce( (acc, curr, index) => {
 console.log(lista2);
 
 
-console.log("3.2:")
-const cenaNabial = listaZakupow.reduce((acc = 0, curr, index, arr) => {
+console.log("3.2:");
+const cenaNabial = listaZakupow.reduce((acc, curr) => {
 
     if (curr.typ === "nabiał"){
-        acc += curr.cena
+        acc += curr.cena;
     }
-    return acc
-}, 0)
-console.log(cenaNabial)
+    return acc;
+}, 0);
+console.log(cenaNabial);
 
 console.log("3.3:")
 const produktyNaKg = listaZakupow.filter(n => n.jednostka === "kg")
