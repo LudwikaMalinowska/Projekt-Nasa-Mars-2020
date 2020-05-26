@@ -1,4 +1,5 @@
-﻿const listaZakupow = [
+﻿const _ = require("lodash");
+const listaZakupow = [
     {
         produkt: "chleb",
         typ: "pieczywo",
@@ -120,4 +121,27 @@ console.log("3.5:")
 const prodNaSztuki = listaZakupow.filter(n => n.jednostka === "sztuk").map(n => n.produkt)
 console.log(prodNaSztuki)
 
+//zadanie 3.6
+console.log("3.6:");
+
+const printGrouped = (list) => {
+    const grouped = _.groupBy(list, 'typ');
+
+    // console.log("obj entries:")
+    // console.log(Object.entries(grouped))
+    const x = Object.entries(grouped)
+
+    const reduced = x.map(n => [n[0], n[1].reduce( (acc, curr, index) => {
+        console.log(curr)
+        return [...acc, `${index + 1}. ${curr.produkt} - ${curr.ilosc} ${curr.jednostka}`]
+    }, []) ]);
+
+    reduced.map(n => {
+        console.log(n[0]);
+        n[1].forEach(m => {
+            console.log(m)
+        })
+    })
+};
+printGrouped(listaZakupow);
 
