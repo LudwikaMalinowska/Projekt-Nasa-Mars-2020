@@ -107,8 +107,7 @@ console.log(cenaNabial)
 console.log("3.3:")
 const produktyNaKg = listaZakupow.filter(n => n.jednostka === "kg")
 
-console.log(produktyNaKg.sort((n,m) =>  (n.produkt < m.produkt)))
-// ^ poprawić potem ^
+console.log(_.sortBy(produktyNaKg, 'produkt'));
 
 //zadanie 3.4
 console.log("3.4:")
