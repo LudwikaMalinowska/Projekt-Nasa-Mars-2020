@@ -81,15 +81,18 @@ const listaZakupow = [
 
 //3.1
 console.log("3.1:")
-listaZakupow.reduce((prev, curr, index, arr) => {
-    curr.cena = curr.cena * curr.ilosc
-    delete curr.ilosc;
-    if (index === 1) {
-        prev.cena = prev.cena * prev.ilosc
-        delete prev.ilosc;
-    }
-});
-console.log(listaZakupow)
+const lista2 = listaZakupow.reduce( (acc, curr, index) => {
+
+    acc.push({
+        produkt: curr["produkt"],
+        typ: curr["typ"],
+        cena: (curr["ilosc"] * curr["cena"]).toFixed(2),
+        jednostka: curr["jednostka"]
+    });
+    return acc
+}, []);
+console.log(lista2);
+
 
 console.log("3.2:")
 const cenaNabial = listaZakupow.reduce((acc = 0, curr, index, arr) => {
