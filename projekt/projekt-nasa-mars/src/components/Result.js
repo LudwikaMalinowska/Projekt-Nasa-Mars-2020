@@ -8,13 +8,26 @@ const Result = (props) => {
         photosNumber,
         camera,
         earth_date,
-        img_src,
+        imgs_srcs,
         rover,
-        sol} = props;
+        sol} = props.marsPhoto;
+
+        const img_src = imgs_srcs[3]
 
     let content = null;
 
-    if (!err)  {
+    // let photoContent = <div></div>
+    //
+    // for (let i = 0; i < imgs_srcs.length; i++){
+    //     const photo = React.createElement("img", {
+    //         src: imgs_srcs[i],
+    //         alt: ""})
+    //     // photoContent.innerHTML += photo;
+    //     photoContent.appendChild(photo);
+    //
+    // }
+
+    if (!error)  {
 
 
         content = (
@@ -22,7 +35,13 @@ const Result = (props) => {
             //
             // </>
             <div>
-                ${props}
+
+                <p>Dzień: {value}</p>
+                <p>Liczba zdjęć: {photosNumber}</p>
+                <img src={img_src} alt={""}/>
+                {/*{photoContent}*/}
+                <p></p>
+                <p></p>
             </div>
         )
     }
@@ -30,7 +49,7 @@ const Result = (props) => {
     return (
 
         <div className="result">
-            {err ? `Nie mamy w bazie ${city}` : content}
+            {error ? `Nie mamy w bazie ${value}` : content}
         </div>
 
     );

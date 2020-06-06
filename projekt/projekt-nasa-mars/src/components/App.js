@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../App.css';
 import Form from "./Form";
+import Result from "./Result";
 
 const axios = require('axios');
 
@@ -12,7 +13,7 @@ class App extends Component{
         photosNumber: 0,
         camera: "",
         earth_date: "",
-        img_src: "",
+        imgs_srcs: "",
         rover: "",
         sol: "",
     }
@@ -63,15 +64,22 @@ class App extends Component{
                         err: false,
                         photosNumber: photosTab.length
                     }));
-                    return photosTab[0]
+                    return photosTab
                 })
                 .then(data => {
                     console.log(data)
+                    const data1 = data[0]
+
+                    const photosSrcs = []
+                    for (let i = 0; i < data.length; i++){
+                        photosSrcs.push(data[i].img_src);
+                    }
+
                     this.setState(state => ({
-                        camera: data.camera,
-                        earth_date: data.earth_date,
-                        id: data.id,
-                        img_src: data.img_src,
+                        camera: data1.camera,
+                        earth_date: data1.earth_date,
+                        id: data1.id,
+                        imgs_srcs: photosSrcs,
                         rover: data.rover,
                         sol: data.sol
                         })
@@ -90,46 +98,8 @@ class App extends Component{
         }
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-        // if (this.state.value.length === 0) return
-        // if (prevState.value !== this.state.value) {
-        //
-        //     const nasaAPIkey = 'C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE';
-        //     // const ap = axios.get('https://api.nasa.gov/planetary/apod?api_key=C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE')
-        //     //     .then(res => {
-        //     //             console.log(res)
-        //     //         }).catch(err => {
-        //     //                         console.log(err);
-        //     //                     });
-        //
-        //     // `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=${nasaAPIkey}`
-        //
-        //     // const earth_date = '2015-6-3'
-        //     const earth_date = this.state.value
-        //     const ap2 = axios.get('https://api.nasa.gov/mars-photos/api/v1/'
-        //         + 'rovers/curiosity/photos?'
-        //         + 'earth_date=' + earth_date
-        //         + '&api_key=' + nasaAPIkey)
-        //         .then(res => {
-        //             // console.log(response.ok)
-        //             if (res.status === 200){
-        //                 return res;
-        //             }
-        //             throw Error("Błąd");
-        //         })
-        //         .then(res => {
-        //             const photosTab = res.data.photos;
-        //             console.log(photosTab);
-        //
-        //         })
-        //         .catch(err => {
-        //             console.log(err);
-        //             this.setState(prevState => ({
-        //                 err: true,
-        //                 value: prevState.value
-        //             }))
-        //         });
-        // }
+
+
 
 
     render() {
@@ -138,7 +108,7 @@ class App extends Component{
                 value={this.state.value}
                 change={this.handleInputChange}
                 submit={this.handleSubmit}/>
-            {/*<Result />*/}
+            <Result marsPhoto={this.state}/>
         </div>);
     }
 }
