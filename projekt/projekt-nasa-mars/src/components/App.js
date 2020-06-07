@@ -11,11 +11,14 @@ class App extends Component{
         value: "",
         error: false,
         photosNumber: 0,
-        camera: "",
-        earth_date: "",
-        imgs_srcs: "",
-        rover: "",
-        sol: "",
+        // camera: "",
+        // earth_date: "",
+        // imgs_srcs: "",
+        // rover: "",
+        // sol: "",
+        // alldata: ""
+        submitted: false,
+        info: []
     }
 
     handleInputChange = (e) => {
@@ -70,20 +73,39 @@ class App extends Component{
                     console.log(data)
                     const data1 = data[0]
 
-                    const photosSrcs = []
-                    for (let i = 0; i < data.length; i++){
-                        photosSrcs.push(data[i].img_src);
-                    }
+                    // const photosSrcs = []
+                    // for (let i = 0; i < data.length; i++){
+                    //     photosSrcs.push(data[i].img_src);
+                    // }
 
-                    this.setState(state => ({
-                        camera: data1.camera,
-                        earth_date: data1.earth_date,
-                        id: data1.id,
-                        imgs_srcs: photosSrcs,
-                        rover: data.rover,
-                        sol: data.sol
+                    const info = data.reduce( (acc, curr, index) => {
+                        const photoInfo = {
+                            idZdj: index,
+                            dataZdj: curr.earth_date,
+                            srcZdj: curr["img_src"],
+                            roverName: curr.rover.name
+                        }
+                        return [...acc, photoInfo];
+                    }, [])
+
+                    console.log(info)
+
+                    // this.setState(state => ({
+                    //     camera: data1.camera,
+                    //     earth_date: data1.earth_date,
+                    //     id: data1.id,
+                    //     imgs_srcs: data1.img_src,
+                    //     rover: data.rover,
+                    //     sol: data.sol,
+                    //     info: info
+                    //     })
+
+                    // )
+
+                    this.setState( state => ({
+                        submitted: true,
+                        info: info
                         })
-
                     )
 
                     console.log(this.props)
