@@ -3,6 +3,7 @@ import '../App.css';
 import Form from "./Form";
 import Result from "./Result";
 
+
 const axios = require('axios');
 
 class App extends Component{
@@ -29,6 +30,7 @@ class App extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
+        // e.persist()
         console.log("klik")
 
         if (this.state.value.length === 0) return
@@ -79,8 +81,14 @@ class App extends Component{
                     // }
 
                     const info = data.reduce( (acc, curr, index) => {
+
+                        if (index > 500){
+                            return [...acc]
+                        }
+
                         const photoInfo = {
-                            idZdj: index,
+                            idZdj: curr.id,
+                            nrZdj: index,
                             dataZdj: curr.earth_date,
                             srcZdj: curr["img_src"],
                             roverName: curr.rover.name
@@ -120,6 +128,77 @@ class App extends Component{
         }
     }
 
+    handleClickOldest = (e) => {
+        console.log("najstarsze")
+
+        const missionNumber = 1; //1sza, najstarsza misja, najstarsze zdjęcia
+        const nasaAPIkey = 'C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE';
+        const ap2 = axios.get('https://api.nasa.gov/mars-photos/api/v1/'
+            + 'rovers/curiosity/photos?'
+            + 'sol=' + missionNumber
+            + '&api_key=' + nasaAPIkey)
+            .then(response => {
+                console.log("najst ok klik")
+
+                if (response.status === 200) {
+                    return response.data.photos;
+                }
+                else {
+                    throw Error("Błąd");
+                }
+            })
+            .then(response => {
+                const minDate = response[0].rover.landing_date
+
+                console.log(response)
+
+                this.setState({
+                    value: minDate
+                })
+
+                this.handleSubmit(e)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    handleClickNewest = (e) => {
+        console.log("najnowsze")
+
+        const missionNumber = 1;
+        const nasaAPIkey = 'C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE';
+        const ap2 = axios.get('https://api.nasa.gov/mars-photos/api/v1/'
+            + 'rovers/curiosity/photos?'
+            + 'sol=' + missionNumber
+            + '&api_key=' + nasaAPIkey)
+            .then(response => {
+                console.log("najst ok klik")
+
+                if (response.status === 200) {
+                    return response.data.photos;
+                }
+                else {
+                    throw Error("Błąd");
+                }
+            })
+            .then(response => {
+                console.log(response)
+                const maxDate = response[0].rover.max_date
+                console.log(maxDate)
+
+                this.setState({
+                    value: maxDate
+                })
+
+                this.handleSubmit(e)
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
 
 
 
@@ -130,6 +209,14 @@ class App extends Component{
                 value={this.state.value}
                 change={this.handleInputChange}
                 submit={this.handleSubmit}/>
+                <div>
+                    {/*<Oldest/>*/}
+                    {/*<Newest />*/}
+                    <button id={"newest"} onClick={this.handleClickOldest}
+                    >Wyszukaj najstarsze</button>
+                    <button id={"oldest"} onClick={this.handleClickNewest}
+                    >Wyszukaj najnowsze</button>
+                </div>
             <Result marsPhoto={this.state}/>
         </div>);
     }

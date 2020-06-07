@@ -49,7 +49,7 @@ const Result = (props) => {
             const photoContent = (
                 info.map(n =>
                     (
-                        <div className={"result"} key={"result" + n.idZdj}>
+                        <div className={"result"} key={"result" + n.nrZdj} id={n.idZdj}>
                             <img  src={n.srcZdj} alt={"zdj"} />
                             <p>Data: {n.dataZdj}</p>
                             <p>Łazik: {n.roverName}</p>

@@ -29,7 +29,14 @@ const Form = props => {
             <button
                 // onClick={handleClick}
             >Szukaj</button>
+
+
+
         </form>
+            {/*<div>*/}
+            {/*    <button id={"newest"}>Wyszukaj najstarsze</button>*/}
+            {/*    <button id={"oldest"}>Wyszukaj najnowsze</button>*/}
+            {/*</div>*/}
 
         </div>
     )
