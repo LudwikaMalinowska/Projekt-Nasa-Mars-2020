@@ -1,0 +1,23 @@
+/*.search {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*    align-content: center;*/
+/*    justify-content: center;*/
+/*}*/
+form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+
+
+
+}
+
+div.search {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import '../Form.css';
 
 //sfc stateless function component
 const Form = props => {
@@ -10,9 +11,14 @@ const Form = props => {
     // }
 
     return (
+        <div className={"search"}>
+
+        <p>Mars photos</p>
         <form
             onSubmit={props.submit}
         >
+
+
             <input
                 type="text"
                 value={props.value}
@@ -24,6 +30,8 @@ const Form = props => {
                 // onClick={handleClick}
             >Szukaj</button>
         </form>
+
+        </div>
     )
 }
 

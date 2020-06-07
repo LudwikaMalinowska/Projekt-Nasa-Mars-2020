@@ -72,8 +72,11 @@ const Result = (props) => {
                 // </>
                 <div>
 
-                    <p>Dzień: {value}</p>
-                    <p>Liczba zdjęć: {photosNumber}</p>
+                    {/*<div className={"topInfo"}>*/}
+                        <p>Dzień: {value}</p>
+                        <p>Liczba zdjęć: {photosNumber}</p>
+                    {/*</div>*/}
+
                     {/*<img src={img_src1} alt={""}/>*/}
                     <div className={"resultList"}>
                         {photoContent}
