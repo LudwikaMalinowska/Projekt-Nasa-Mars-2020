@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import {Formik, Field} from 'formik';
+import axios from 'axios';
+
 import '../App.css';
 import Form from "./Form";
 import Result from "./Result";
 
 
-const axios = require('axios');
+// const axios = require('axios');
 
 class App extends Component{
 
@@ -19,6 +22,7 @@ class App extends Component{
         // sol: "",
         // alldata: ""
         submitted: false,
+        searchBy: "mission",
         info: []
     }
 
@@ -27,6 +31,23 @@ class App extends Component{
             value: e.target.value
         })
     }
+
+    handleSearchByDateClick = (e) => {
+
+        this.setState({
+            value: "",
+            searchBy: "date"
+        })
+    }
+
+    handleSearchByMissionClick = (e) => {
+
+        this.setState({
+            value: "",
+            searchBy: "mission"
+        })
+    }
+
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -49,10 +70,26 @@ class App extends Component{
 
             // const earth_date = '2015-6-3'
             const earth_date = this.state.value
-            const ap2 = axios.get('https://api.nasa.gov/mars-photos/api/v1/'
-                + 'rovers/curiosity/photos?'
-                + 'earth_date=' + earth_date
-                + '&api_key=' + nasaAPIkey)
+            const APIBaseLink = 'https://api.nasa.gov/mars-photos/api/v1/'
+                + 'rovers/curiosity/photos?';
+
+            let searchCriteria = '';
+            // let missionNumber = 2;
+            let missionNumber = this.state.value
+            if (this.state.searchBy === 'date')
+                searchCriteria = 'earth_date=' + earth_date
+            else if (this.state.searchBy === 'mission')
+                searchCriteria = 'sol=' + missionNumber
+
+            const link = APIBaseLink + searchCriteria + '&api_key=' + nasaAPIkey;
+            console.log("Link: " + link)
+
+
+            // const ap2 = axios.get( APIBaseLink
+            //     // + 'earth_date=' + earth_date
+            //     + searchCriteria
+            //     + '&api_key=' + nasaAPIkey)
+                const ap2 = axios.get(link)
                 .then(res => {
                     // console.log(response.ok)
                     if (res.status === 200) {
@@ -75,10 +112,7 @@ class App extends Component{
                     console.log(data)
                     const data1 = data[0]
 
-                    // const photosSrcs = []
-                    // for (let i = 0; i < data.length; i++){
-                    //     photosSrcs.push(data[i].img_src);
-                    // }
+
 
                     const info = data.reduce( (acc, curr, index) => {
 
@@ -91,24 +125,15 @@ class App extends Component{
                             nrZdj: index,
                             dataZdj: curr.earth_date,
                             srcZdj: curr["img_src"],
-                            roverName: curr.rover.name
+                            roverName: curr.rover.name,
+                            nrMisji: curr.sol,
+                            kamera: curr.camera.full_name
                         }
                         return [...acc, photoInfo];
                     }, [])
 
                     console.log(info)
 
-                    // this.setState(state => ({
-                    //     camera: data1.camera,
-                    //     earth_date: data1.earth_date,
-                    //     id: data1.id,
-                    //     imgs_srcs: data1.img_src,
-                    //     rover: data.rover,
-                    //     sol: data.sol,
-                    //     info: info
-                    //     })
-
-                    // )
 
                     this.setState( state => ({
                         submitted: true,
@@ -121,7 +146,7 @@ class App extends Component{
                 .catch(err => {
                     console.log(err);
                     this.setState(prevState => ({
-                        err: true,
+                        error: true,
                         value: prevState.value
                     }))
                 });
@@ -148,15 +173,17 @@ class App extends Component{
                 }
             })
             .then(response => {
-                const minDate = response[0].rover.landing_date
+                // const minDate = response[0].rover.landing_date
+                const firstMissionDate = response[0].earth_date
 
                 console.log(response)
 
                 this.setState({
-                    value: minDate
+                    value: firstMissionDate
                 })
 
-                this.handleSubmit(e)
+                // e.persist()
+                // this.handleSubmit(e)
             })
             .catch(error => {
                 console.log(error)
@@ -191,7 +218,8 @@ class App extends Component{
                     value: maxDate
                 })
 
-                this.handleSubmit(e)
+                // e.persist()
+                // this.handleSubmit(e)
 
             })
             .catch(error => {
@@ -210,8 +238,24 @@ class App extends Component{
                 change={this.handleInputChange}
                 submit={this.handleSubmit}/>
                 <div>
-                    {/*<Oldest/>*/}
-                    {/*<Newest />*/}
+                    <button>Zmień kryteria wyszukiwania</button>
+
+                    <p>Szukaj według:</p>
+                    <p>Daty:</p>
+                    <input type="radio" id="dateSearch"
+                           name={"searchCriteria"} value={"date"}
+                           onClick={this.handleSearchByDateClick}/>
+                    <p>Numeru misji:</p>
+                    <input type="radio" id="missionSearch"
+                           defaultChecked={"checked"}
+                           name={"searchCriteria"} value={"mission"}
+                           onClick={this.handleSearchByMissionClick}/>
+
+                </div>
+
+
+                <div>
+
                     <button id={"newest"} onClick={this.handleClickOldest}
                     >Wyszukaj najstarsze</button>
                     <button id={"oldest"} onClick={this.handleClickNewest}

@@ -1,5 +1,6 @@
 import React from "react";
 import '../Result.css';
+const _ = require('lodash');
 
 
 const Result = (props) => {
@@ -18,6 +19,7 @@ const Result = (props) => {
         error,
         photosNumber,
         submitted,
+        searchBy,
         info
     } = props.marsPhoto;
 
@@ -28,14 +30,45 @@ const Result = (props) => {
     let content = null;
 
 
+    if (error){
 
-    if (!error && submitted)  {
+        // let dayMissionLabel = "";
+        if (searchBy === "mission"){
+            content = (
+                <div>
+                    <p>Misja: {value}</p>
+                    <p>Błąd. Wpisano nieprawidłowy numer misji. Wpisz liczbę z zakresu 1-2786</p>
+                </div>
+            )
+        }
+
+        else if (searchBy === "date"){
+            content = (
+                <div>
+                    <p>Data: {value}</p>
+                    <p>Błąd. Wpisano nieprawidłową datę. Wpisz datę w formacie rrrr-mm-dd</p>
+                </div>
+            )
+        }
+
+
+
+    }
+
+
+    else if (!error && submitted)  {
 
         if (info.length === 0){
 
+            let dayMissionLabel = "";
+            if (searchBy === "mission")
+                dayMissionLabel = "Misja nr"
+            else if (searchBy === "date")
+                dayMissionLabel = "Data"
+
             content = (
                 <div>
-                    <p>Dzień: {value}</p>
+                    <p>{dayMissionLabel}: {value}</p>
                     <p>Liczba zdjęć: {photosNumber}</p>
                     <p>Tego dnia łazik Curiosity nie zrobił żadnych zdjęć, wybierz inną datę.</p>
                 </div>
@@ -43,20 +76,27 @@ const Result = (props) => {
         }
 
         console.log(info);
-        console.log(info[3]);
+        // console.log(info[3]);
         if (info[3] !== undefined) {
+
 
             const photoContent = (
                 info.map(n =>
                     (
                         <div className={"result"} key={"result" + n.nrZdj} id={n.idZdj}>
                             <img  src={n.srcZdj} alt={"zdj"} />
+                            <p>id: {n.idZdj}</p>
+                            <p>Numer misji: {n.nrMisji}</p>
                             <p>Data: {n.dataZdj}</p>
                             <p>Łazik: {n.roverName}</p>
+                            <p>Kamera: {n.kamera}</p>
+
                         </div>
                         )
                 )
             )
+
+
 
 
 
@@ -66,6 +106,12 @@ const Result = (props) => {
             // const info3 = info[3];
             // const img_src1 = info3.srcZdj;
 
+            let dayMissionLabel = "";
+            if (searchBy === "mission")
+                dayMissionLabel = "Misja nr"
+            else if (searchBy === "date")
+                dayMissionLabel = "Data"
+
             content = (
                 // <>
                 //
@@ -73,7 +119,7 @@ const Result = (props) => {
                 <div>
 
                     {/*<div className={"topInfo"}>*/}
-                        <p>Dzień: {value}</p>
+                        <p>{dayMissionLabel}: {value}</p>
                         <p>Liczba zdjęć: {photosNumber}</p>
                     {/*</div>*/}
 
@@ -89,54 +135,13 @@ const Result = (props) => {
             )
         }
 
-
-        // let photoContent = (<div></div>)
-        //
-        // for (let i = 0; i < imgs_srcs.length; i++){
-        //     const photo = React.createElement("img", {
-        //         src: imgs_srcs[i],
-        //         alt: ""})
-        //     // photoContent.innerHTML += photo;
-        //     photoContent.appendChild(photo);
-        //
-        // }
-        //
-        // console.log(photoContent)
-
-        // let photoContent = "";
-        // for (let i = 0; i < imgs_srcs.length; i++){
-        //         // const photo = React.createElement("img", {
-        //         //     src: imgs_srcs[i],
-        //         //     alt: ""})
-        //         const img_src1 = imgs_srcs[i];
-        //         photoContent += `<img src={(alldata.i).src_img} alt={""}/>`;
-        //         // photoContent.appendChild(photo);
-        //
-        //     }
-
-
-
-        // const photoContent = []
-        // for (let i = 0; i < imgs_srcs.length; i++) {
-        //     const img_src1 = alldata[i].img_src;
-        //     const img1 = React.createElement('img', {
-        //         src: img_src1
-        //
-        //     });
-        // }
-
-        // console.log("pht con:")
-        // console.log(photoContent)
-
-
-
-
     }
 
     return (
 
         <div className="result">
-            {error ? `Nie mamy w bazie ${value}` : content}
+            {/*{error ? `Nie mamy w bazie ${value}` : content}*/}
+            {content}
         </div>
 
     );

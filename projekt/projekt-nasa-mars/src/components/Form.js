@@ -1,14 +1,9 @@
 import React from "react";
+import {Formik, Field} from 'formik';
 import '../Form.css';
 
-//sfc stateless function component
-const Form = props => {
 
-    // const handleClick = (e) => {
-    //     e.preventDefault();
-    //
-    //     // console.log(props.value)
-    // }
+const Form = props => {
 
     return (
         <div className={"search"}>
@@ -30,15 +25,11 @@ const Form = props => {
                 // onClick={handleClick}
             >Szukaj</button>
 
-
-
         </form>
-            {/*<div>*/}
-            {/*    <button id={"newest"}>Wyszukaj najstarsze</button>*/}
-            {/*    <button id={"oldest"}>Wyszukaj najnowsze</button>*/}
-            {/*</div>*/}
 
         </div>
+
+
     )
 }
 
