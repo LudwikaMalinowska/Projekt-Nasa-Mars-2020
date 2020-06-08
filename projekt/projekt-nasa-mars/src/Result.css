@@ -22,3 +22,11 @@ div.result div.resultList p {
 div.result p {
 text-align: center;
 }
+
+div.result {
+    text-align: center;
+}
+
+.favHeart {
+    cursor: pointer;
+}

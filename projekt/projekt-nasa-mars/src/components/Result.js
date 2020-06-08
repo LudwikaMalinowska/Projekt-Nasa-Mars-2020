@@ -20,6 +20,7 @@ const Result = (props) => {
         photosNumber,
         submitted,
         searchBy,
+        idSort,
         info
     } = props.marsPhoto;
 
@@ -56,7 +57,7 @@ const Result = (props) => {
     }
 
 
-    else if (!error && submitted)  {
+    if (!error && submitted)  {
 
         if (info.length === 0){
 
@@ -80,8 +81,15 @@ const Result = (props) => {
         if (info[3] !== undefined) {
 
 
+
+            let sortedInfo =  _.sortBy(info, 'idZdj')
+            console.log(sortedInfo)
+
+            const infoToPrint = (idSort) ? sortedInfo : info;
+            // console.log(infoToPrint)
+
             const photoContent = (
-                info.map(n =>
+                infoToPrint.map(n =>
                     (
                         <div className={"result"} key={"result" + n.nrZdj} id={n.idZdj}>
                             <img  src={n.srcZdj} alt={"zdj"} />
@@ -92,7 +100,7 @@ const Result = (props) => {
                             <p>Kamera: {n.kamera}</p>
 
                         </div>
-                        )
+                    )
                 )
             )
 
@@ -119,8 +127,8 @@ const Result = (props) => {
                 <div>
 
                     {/*<div className={"topInfo"}>*/}
-                        <p>{dayMissionLabel}: {value}</p>
-                        <p>Liczba zdjęć: {photosNumber}</p>
+                    <p>{dayMissionLabel}: {value}</p>
+                    <p>Liczba zdjęć: {photosNumber}</p>
                     {/*</div>*/}
 
                     {/*<img src={img_src1} alt={""}/>*/}

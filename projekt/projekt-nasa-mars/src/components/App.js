@@ -23,6 +23,7 @@ class App extends Component{
         // alldata: ""
         submitted: false,
         searchBy: "mission",
+        idSort: false,
         info: []
     }
 
@@ -48,6 +49,18 @@ class App extends Component{
         })
     }
 
+    handleSortByIdClick = (e) => {
+
+        this.setState({
+            idSort: true
+        })
+    }
+
+    handleSortDontSortClick = (e) => {
+        this.setState({
+            idSort: false
+        })
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -89,7 +102,7 @@ class App extends Component{
             //     // + 'earth_date=' + earth_date
             //     + searchCriteria
             //     + '&api_key=' + nasaAPIkey)
-                const ap2 = axios.get(link)
+            const ap2 = axios.get(link)
                 .then(res => {
                     // console.log(response.ok)
                     if (res.status === 200) {
@@ -136,8 +149,8 @@ class App extends Component{
 
 
                     this.setState( state => ({
-                        submitted: true,
-                        info: info
+                            submitted: true,
+                            info: info
                         })
                     )
 
@@ -237,30 +250,44 @@ class App extends Component{
                 value={this.state.value}
                 change={this.handleInputChange}
                 submit={this.handleSubmit}/>
-                <div>
-                    <button>Zmień kryteria wyszukiwania</button>
+            <div>
+                <button>Zmień kryteria wyszukiwania</button>
 
-                    <p>Szukaj według:</p>
-                    <p>Daty:</p>
-                    <input type="radio" id="dateSearch"
-                           name={"searchCriteria"} value={"date"}
-                           onClick={this.handleSearchByDateClick}/>
-                    <p>Numeru misji:</p>
-                    <input type="radio" id="missionSearch"
-                           defaultChecked={"checked"}
-                           name={"searchCriteria"} value={"mission"}
-                           onClick={this.handleSearchByMissionClick}/>
+                <p>Szukaj według:</p>
+                <p>Daty:</p>
+                <input type="radio" id="dateSearch"
+                       name={"searchCriteria"} value={"date"}
+                       onClick={this.handleSearchByDateClick}/>
+                <p>Numeru misji:</p>
+                <input type="radio" id="missionSearch"
+                       defaultChecked={"checked"}
+                       name={"searchCriteria"} value={"mission"}
+                       onClick={this.handleSearchByMissionClick}/>
 
-                </div>
+            </div>
+            <div className={"sort"}>
+                <p>Posortuj według id </p>
+                {/*<p>id: </p>*/}
+                {/*<input type="radio" id="idFilter"*/}
+                {/*       name={"filterCriteria"} value={"id"}*/}
+                {/*       // onClick={this.handleSearchByDateClick}*/}
+                {/*/>*/}
+                <button
+                    onClick={this.handleSortByIdClick}>Sortuj</button>
+                <button
+                    onClick={this.handleSortDontSortClick}>
+                    Nie Sortuj</button>
+
+            </div>
 
 
-                <div>
+            <div>
 
-                    <button id={"newest"} onClick={this.handleClickOldest}
-                    >Wyszukaj najstarsze</button>
-                    <button id={"oldest"} onClick={this.handleClickNewest}
-                    >Wyszukaj najnowsze</button>
-                </div>
+                <button id={"newest"} onClick={this.handleClickOldest}
+                >Wyszukaj najstarsze</button>
+                <button id={"oldest"} onClick={this.handleClickNewest}
+                >Wyszukaj najnowsze</button>
+            </div>
             <Result marsPhoto={this.state}/>
         </div>);
     }
@@ -268,3 +295,4 @@ class App extends Component{
 
 
 export default App;
+
