@@ -6,7 +6,7 @@ import '../App.css';
 import Form from "./Form";
 import Result from "./Result";
 
-
+const _ = require('lodash');
 // const axios = require('axios');
 
 class App extends Component{
@@ -15,16 +15,13 @@ class App extends Component{
         value: "",
         error: false,
         photosNumber: 0,
-        // camera: "",
-        // earth_date: "",
-        // imgs_srcs: "",
-        // rover: "",
-        // sol: "",
-        // alldata: ""
         submitted: false,
         searchBy: "mission",
         idSort: false,
-        info: []
+        info: [],
+        photoContent: [],
+        favs: [],
+        favClick: false
     }
 
     handleInputChange = (e) => {
@@ -62,13 +59,64 @@ class App extends Component{
         })
     }
 
+    handleShowFavClick = (e) => {
+
+        const favs2 = this.state.favs
+        const photoContent2 = (
+            favs2.map(n =>
+                (
+                    <div className={"result"} key={n.idZdj} id={n.idZdj}
+                    >
+                        <img  src={n.srcZdj} alt={"zdj"} />
+                        <div
+                            id={n.nrZdj}
+                            className={"favHeart"}
+                            onClick={this.handleAddToFavClick}
+                        ><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                        <p>id: {n.idZdj}</p>
+                        <p>Numer misji: {n.nrMisji}</p>
+                        <p>Data: {n.dataZdj}</p>
+                        <p>Łazik: {n.roverName}</p>
+                        <p>Kamera: {n.kamera}</p>
+
+
+                    </div>
+                )
+            )
+        )
+
+        this.setState({
+            value: "",
+            photoContent: photoContent2,
+            favClick: true
+        })
+
+    }
+
+    handleAddToFavClick = (e) => {
+        const clickedPhoto = e.target.parentNode.parentNode
+
+        const photoIndex = e.target.parentNode.id
+        const photoObj = this.state.info[photoIndex]
+
+        this.state.favs.push(photoObj)
+
+
+
+
+
+        // console.log(clickedPhoto)
+
+
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         // e.persist()
         console.log("klik")
 
         if (this.state.value.length === 0) return
-        // if (prevState.value !== this.state.value) {
+
         else {
 
             const nasaAPIkey = 'C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE';
@@ -98,13 +146,10 @@ class App extends Component{
             console.log("Link: " + link)
 
 
-            // const ap2 = axios.get( APIBaseLink
-            //     // + 'earth_date=' + earth_date
-            //     + searchCriteria
-            //     + '&api_key=' + nasaAPIkey)
+
             const ap2 = axios.get(link)
                 .then(res => {
-                    // console.log(response.ok)
+
                     if (res.status === 200) {
                         return res;
                     }
@@ -154,13 +199,53 @@ class App extends Component{
                         })
                     )
 
-                    console.log(this.props)
+                    // console.log(this.props)
+
+
+                    let content = "";
+                    let sortedInfo =  _.sortBy(info, 'idZdj')
+                    console.log(sortedInfo)
+
+                    const infoToPrint = (this.idSort) ? sortedInfo : info;
+                    // console.log(infoToPrint)
+
+                    const photoContent = (
+                        infoToPrint.map(n =>
+                            (
+                                <div className={"result"} key={n.idZdj} id={n.idZdj}
+                                >
+                                    <img  src={n.srcZdj} alt={"zdj"} />
+                                    <div
+                                        id={n.nrZdj}
+                                        className={"favHeart"}
+                                        onClick={this.handleAddToFavClick}
+                                    ><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                                    <p>id: {n.idZdj}</p>
+                                    <p>Numer misji: {n.nrMisji}</p>
+                                    <p>Data: {n.dataZdj}</p>
+                                    <p>Łazik: {n.roverName}</p>
+                                    <p>Kamera: {n.kamera}</p>
+
+
+                                </div>
+                            )
+                        )
+                    )
+
+                    this.setState({
+                        photoContent: photoContent,
+                        favClick: false
+                    })
+
+
+
                 })
                 .catch(err => {
                     console.log(err);
                     this.setState(prevState => ({
                         error: true,
-                        value: prevState.value
+                        value: prevState.value,
+                        favClick: false
                     }))
                 });
         }
@@ -192,7 +277,8 @@ class App extends Component{
                 console.log(response)
 
                 this.setState({
-                    value: firstMissionDate
+                    value: firstMissionDate,
+                    favClick: false
                 })
 
                 // e.persist()
@@ -228,7 +314,8 @@ class App extends Component{
                 console.log(maxDate)
 
                 this.setState({
-                    value: maxDate
+                    value: maxDate,
+                    favClick: false
                 })
 
                 // e.persist()
@@ -288,6 +375,11 @@ class App extends Component{
                 <button id={"oldest"} onClick={this.handleClickNewest}
                 >Wyszukaj najnowsze</button>
             </div>
+
+            <button
+                id={"showFav"}
+                onClick={this.handleShowFavClick}
+            >Pokaż zapisane zdjęcia</button>
             <Result marsPhoto={this.state}/>
         </div>);
     }
@@ -295,4 +387,3 @@ class App extends Component{
 
 
 export default App;
-

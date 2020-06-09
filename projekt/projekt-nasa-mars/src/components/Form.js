@@ -2,16 +2,8 @@ import React from "react";
 import {Formik, Field} from 'formik';
 import '../Form.css';
 
-//sfc stateless function component
+
 const Form = props => {
-
-    // const handleClick = (e) => {
-    //     e.preventDefault();
-    //
-    //     // console.log(props.value)
-    // }
-
-
 
     return (
         <div className={"search"}>
