@@ -34,32 +34,3 @@ const Form = props => {
 }
 
 export default Form;
-
-// {/*// <div>*/}
-// //{/*    <button id={"newest"}>Wyszukaj najstarsze</button>*/}
-// //{/*    <button id={"oldest"}>Wyszukaj najnowsze</button>*/}
-//
-// </div>
-//
-// {/*// <div className={"search"}>*/}
-// {/*//*/}
-// {/*// <p>Mars photos</p>*/}
-// {/*//*/}
-// {/*// <Formik initialValues={{userId: 0, title: ""}}*/}
-// //         onSubmit={props.submit}>
-// //     {(formProps) => (
-// //         <form
-// //             onSubmit={formProps.submit}
-// //         >
-// //             <Field
-// //                 type="text"
-// //                 value={props.value}
-// //                 name={"userId"}
-// //                 onChange={props.change}
-// //                 placeholder="wpisz datę"
-// //             />
-// //
-// //             <button type={"submit"}>OK</button>
-// //         </form>
-// //     )}
-// // </Formik>

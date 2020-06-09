@@ -30,6 +30,7 @@ const Result = (props) => {
         sortBy,
         info,
         photoContent,
+        favsToAdd,
         favs,
         favClick,
         editedData,

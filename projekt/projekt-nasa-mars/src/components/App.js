@@ -8,7 +8,6 @@ import EditForm from "./EditForm";
 import Result from "./Result";
 
 const _ = require('lodash');
-// const axios = require('axios');
 
 class App extends Component{
 
@@ -22,6 +21,7 @@ class App extends Component{
         sortBy: "",
         info: [],
         photoContent: [],
+        favsToAdd: [],
         favs: [],
         favClick: false,
         editedData: {}
@@ -76,8 +76,9 @@ class App extends Component{
             favs: favs2
         })
 
+    }
 
-
+    handleToggleClass = () => {
 
     }
 
@@ -211,78 +212,56 @@ class App extends Component{
         }
     }
 
+    handleAddChoosenToFavClick = (e) => {
+
+        const favsToAdd = this.state.favsToAdd;
+        for (let i = 0; i < favsToAdd.length; i++){
+
+            const isInFav = this.state.favs.includes(favsToAdd[i])
+            if (!isInFav) {
+                this.state.favs.push(favsToAdd[i])
+            }
+        }
+
+        this.setState({
+            favsToAdd: []
+        })
+    }
+
     handleAddToFavClick = (e) => {
-        console.log(e.target)
+
 
         const clickedPhoto = e.target.parentNode.parentNode
-        // const clickedPhoto = e.target.parentNode
-        console.log("ad fav klik")
-        console.log(clickedPhoto)
-        console.log("fav photos:")
-        console.log(this.state.favs)
-
-        // const photoIndex = e.target.parentNode.id
         const photoId = clickedPhoto.id
-        console.log(photoId) //ok
-        // const objToFind = this.state.favs.find(n => n.idZdj === photoId);
-        // const photoIndex = this.state.favs.indexOf(objToFind);
 
         const info2 = this.state.info
-        console.log(info2)
-        console.log(info2[0].idZdj)
         const objToFind = info2.find(n => n.idZdj == photoId);
-        console.log(objToFind)
         const photoIndex = this.state.info.indexOf(objToFind);
-        console.log(photoIndex)
 
         const photoObj = this.state.info[photoIndex]
-        console.log(photoObj)
-
-        console.log("photo obj")
-        console.log(photoObj)
 
         const ifIsFavAlready = this.state.favs.includes(photoObj)
-        console.log("fav?:" + ifIsFavAlready)
-        console.log(!ifIsFavAlready && photoObj !== undefined)
+        const ifIsFavsToAddAlready = this.state.favsToAdd.includes(photoObj)
 
-        if (!ifIsFavAlready && photoObj !== undefined) {
+
+        if (!ifIsFavAlready && !ifIsFavsToAddAlready && photoObj !== undefined) {
             e.target.className = "fa fa-heart"
-            this.state.favs.push(photoObj)
+            // this.state.favs.push(photoObj)
+            this.state.favsToAdd.push(photoObj)
         }
     }
 
     handleEditClick = (e) => {
 
-        // const clickedIndex = e.target.id;
+
         const clickedPhoto = e.target.parentNode;
-        console.log("1aaaa: ")
-        console.log(clickedPhoto)
-
-        // const idOfEdited = edited.idZdj;
-        // const objToFind = favs2.find(n => n.idZdj === idOfEdited);
-        // const index1 = favs2.indexOf(objToFind);
-
         const clickedId = clickedPhoto.id;
-        console.log("bbbb: ")
-        console.log(clickedId)
-        // const objToFind = this.state.favs.find(n => n.idZdj == clickedId);
         const clickedInfo = this.state.favs.find(n => n.idZdj == clickedId);
-        console.log("cccc: ")
-        // console.log(objToFind)
-        console.log(clickedInfo)
         const clickedIndex = this.state.favs.indexOf(clickedInfo);
-        console.log("ddd:")
-        console.log(clickedIndex)
-
-        // const clickedInfo = this.state.info[clickedIndex];
-        // console.log("eee: ")
-        // console.log(clickedInfo)
 
         const photoContent2 = this.state.photoContent;
         photoContent2[clickedIndex] = (
             <div className={"result"} key={clickedInfo.idZdj} id={clickedInfo.idZdj}>
-            {/*<div className={"result"} key={clickedInfo.idZdj} id={clickedInfo.nrZdj}>*/}
-
 
                 <img  src={clickedInfo.srcZdj} alt={"zdj"} />
 
@@ -329,8 +308,6 @@ class App extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // e.persist()
-        console.log("klik")
 
         if (this.state.value.length === 0) return
 
@@ -338,21 +315,13 @@ class App extends Component{
 
             const nasaAPIkey = 'C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE';
             // const ap = axios.get('https://api.nasa.gov/planetary/apod?api_key=C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE')
-            //     .then(res => {
-            //             console.log(res)
-            //         }).catch(err => {
-            //                         console.log(err);
-            //                     });
 
-            // `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=${nasaAPIkey}`
 
-            // const earth_date = '2015-6-3'
             const earth_date = this.state.value
             const APIBaseLink = 'https://api.nasa.gov/mars-photos/api/v1/'
                 + 'rovers/curiosity/photos?';
 
             let searchCriteria = '';
-            // let missionNumber = 2;
             let missionNumber = this.state.value
             if (this.state.searchBy === 'date')
                 searchCriteria = 'earth_date=' + earth_date
@@ -360,8 +329,6 @@ class App extends Component{
                 searchCriteria = 'sol=' + missionNumber
 
             const link = APIBaseLink + searchCriteria + '&api_key=' + nasaAPIkey;
-            console.log("Link: " + link)
-
 
 
             const ap2 = axios.get(link)
@@ -376,7 +343,6 @@ class App extends Component{
                 })
                 .then(res => {
                     const photosTab = res.data.photos;
-                    console.log(photosTab);
                     this.setState(state => ({
                         err: false,
                         photosNumber: photosTab.length
@@ -384,10 +350,6 @@ class App extends Component{
                     return photosTab
                 })
                 .then(data => {
-                    console.log(data)
-                    const data1 = data[0]
-
-
 
                     const info = data.reduce( (acc, curr, index) => {
 
@@ -406,8 +368,6 @@ class App extends Component{
                         }
                         return [...acc, photoInfo];
                     }, [])
-
-                    console.log(info)
 
 
                     this.setState( state => ({
@@ -470,7 +430,6 @@ class App extends Component{
     }
 
     handleClickOldest = (e) => {
-        console.log("najstarsze")
 
         const missionNumber = 1; //1sza, najstarsza misja, najstarsze zdjęcia
         const nasaAPIkey = 'C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE';
@@ -479,8 +438,6 @@ class App extends Component{
             + 'sol=' + missionNumber
             + '&api_key=' + nasaAPIkey)
             .then(response => {
-                console.log("najst ok klik")
-
                 if (response.status === 200) {
                     return response.data.photos;
                 }
@@ -492,15 +449,11 @@ class App extends Component{
                 // const minDate = response[0].rover.landing_date
                 const firstMissionDate = response[0].earth_date
 
-                console.log(response)
-
                 this.setState({
                     value: firstMissionDate,
                     favClick: false
                 })
 
-                // e.persist()
-                // this.handleSubmit(e)
             })
             .catch(error => {
                 console.log(error)
@@ -508,7 +461,6 @@ class App extends Component{
     }
 
     handleClickNewest = (e) => {
-        console.log("najnowsze")
 
         const missionNumber = 1;
         const nasaAPIkey = 'C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE';
@@ -517,7 +469,6 @@ class App extends Component{
             + 'sol=' + missionNumber
             + '&api_key=' + nasaAPIkey)
             .then(response => {
-                console.log("najst ok klik")
 
                 if (response.status === 200) {
                     return response.data.photos;
@@ -527,9 +478,7 @@ class App extends Component{
                 }
             })
             .then(response => {
-                console.log(response)
                 const maxDate = response[0].rover.max_date
-                console.log(maxDate)
 
                 this.setState({
                     value: maxDate,
@@ -571,14 +520,8 @@ class App extends Component{
 
             </div>
             <div className={"sort"}>
-                <p>Posortuj według id </p>
-                {/*<p>id: </p>*/}
-                {/*<input type="radio" id="idFilter"*/}
-                {/*       name={"filterCriteria"} value={"id"}*/}
-                {/*       // onClick={this.handleSearchByDateClick}*/}
-                {/*/>*/}
-                {/*<button*/}
-                {/*    onClick={this.handleSortByIdClick}>Sortuj</button>*/}
+                <p>Posortuj według</p>
+
                 <button
                     onClick={this.handleSortByIdClick}>Id</button>
                 <button
@@ -597,6 +540,11 @@ class App extends Component{
                 <button id={"oldest"} onClick={this.handleClickNewest}
                 >Wyszukaj najnowsze</button>
             </div>
+
+            <button
+                id={"addFav"}
+                onClick={this.handleAddChoosenToFavClick}
+            >Dodaj wybrane do ulubionych</button>
 
             <button
                 id={"showFav"}
