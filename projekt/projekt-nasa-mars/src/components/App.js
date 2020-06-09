@@ -18,7 +18,8 @@ class App extends Component{
         photosNumber: 0,
         submitted: false,
         searchBy: "mission",
-        idSort: false,
+        sort: false,
+        sortBy: "",
         info: [],
         photoContent: [],
         favs: [],
@@ -27,26 +28,12 @@ class App extends Component{
     }
 
     myCallback = (edited) => {
-        // console.log(edited)
-        // [...we will use the dataFromChild here...]
-        // console.log(dataFromChild);
-
-        // this.setState({
-        //     editedData: dataFromChild
-        // })
-        // this.state.editedData = dataFromChild;
-        console.log("11111:")
-        console.log(edited);
-        console.log("22222:")
-        console.log(edited.nrZdj);
-
 
         const favs2 = this.state.favs;
 
         const idOfEdited = edited.idZdj;
         const objToFind = favs2.find(n => n.idZdj === idOfEdited);
         const index = favs2.indexOf(objToFind);
-        console.log("3333: " + index)
 
         const photoContent2 = this.state.photoContent;
 
@@ -118,24 +105,71 @@ class App extends Component{
         })
     }
 
+    handleSortByNrClick = (e) => {
+
+        this.setState({
+            sort: true,
+            sortBy: "nrMisji"
+        })
+
+        if (this.state.favClick === false)
+            this.handleSubmit(e)
+        else
+            this.handleShowFavClick(e)
+    }
+
     handleSortByIdClick = (e) => {
 
         this.setState({
-            idSort: true
+            sort: true,
+            sortBy: "id"
         })
+
+        if (this.state.favClick === false)
+            this.handleSubmit(e)
+        else
+            this.handleShowFavClick(e)
     }
 
     handleSortDontSortClick = (e) => {
         this.setState({
-            idSort: false
+            sort: false,
+            sortBy: ""
         })
+
+        if (this.state.favClick === false)
+            this.handleSubmit(e)
+        else
+            this.handleShowFavClick(e)
     }
 
     handleShowFavClick = (e) => {
 
-        const favs2 = this.state.favs
+        let favs2 = this.state.favs;
 
         if (favs2 !== undefined && favs2.length > 0) {
+
+            console.log(this.state.sort)
+
+            if (this.state.sort === true) {
+
+                const sortedId =  _.sortBy(favs2, 'idZdj')
+                console.log("sorted id")
+                console.log(sortedId)
+
+
+                // this.setState({
+                //     info: favs2
+                // })
+                // this.handleSort();
+                // favs2 = this.state.info;
+
+
+            }
+
+            console.log(favs2)
+            console.log(this.state.info)
+
 
             const photoContent2 = (
                 favs2.map(n =>
@@ -171,6 +205,8 @@ class App extends Component{
                 favClick: true,
                 info: favs2
             })
+
+
 
         }
     }
@@ -266,13 +302,29 @@ class App extends Component{
 
     }
 
-    // handleSaveEditingClick = (e) => {
-    //
-    //     const index = e.target.parentNode.id
-    //     console.log(this.state.editedData)
-    //
-    //
-    // }
+    handleSort = () => {
+
+        if (this.state.sort === true) {
+
+            const info = this.state.info;
+            const sortedId =  _.sortBy(info, 'idZdj')
+            const sortedNr =  _.sortBy(info, 'nrMisji')
+
+
+            let sortedInfo = info;
+            if (this.state.sortBy === "id")
+                sortedInfo = sortedId;
+            else if (this.state.sortBy === "nrMisji")
+                sortedInfo = sortedNr;
+
+
+            this.setState({
+                info: sortedInfo
+            })
+        }
+
+
+    }
 
 
     handleSubmit = (e) => {
@@ -364,15 +416,14 @@ class App extends Component{
                         })
                     )
 
-                    // console.log(this.props)
 
 
-                    let content = "";
-                    let sortedInfo =  _.sortBy(info, 'idZdj')
-                    console.log(sortedInfo)
 
-                    const infoToPrint = (this.idSort) ? sortedInfo : info;
-                    // console.log(infoToPrint)
+                    if (this.state.sort === true) {
+                        this.handleSort()
+                    }
+
+                    const infoToPrint = this.state.info
 
                     const photoContent = (
                         infoToPrint.map(n =>
@@ -400,7 +451,8 @@ class App extends Component{
 
                     this.setState({
                         photoContent: photoContent,
-                        favClick: false
+                        favClick: false,
+                        info: infoToPrint
                     })
 
 
@@ -525,8 +577,12 @@ class App extends Component{
                 {/*       name={"filterCriteria"} value={"id"}*/}
                 {/*       // onClick={this.handleSearchByDateClick}*/}
                 {/*/>*/}
+                {/*<button*/}
+                {/*    onClick={this.handleSortByIdClick}>Sortuj</button>*/}
                 <button
-                    onClick={this.handleSortByIdClick}>Sortuj</button>
+                    onClick={this.handleSortByIdClick}>Id</button>
+                <button
+                    onClick={this.handleSortByNrClick}>Nr misji</button>
                 <button
                     onClick={this.handleSortDontSortClick}>
                     Nie Sortuj</button>

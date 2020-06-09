@@ -6,18 +6,33 @@ const _ = require('lodash');
 const Result = (props) => {
 
 
+    // const {
+    //     value,
+    //     error,
+    //     photosNumber,
+    //     submitted,
+    //     searchBy,
+    //     idSort,
+    //     info,
+    //     photoContent,
+    //     favs,
+    //     favClick,
+    //     editedData
+    // } = props.marsPhoto;
+
     const {
         value,
         error,
         photosNumber,
         submitted,
         searchBy,
-        idSort,
+        sort,
+        sortBy,
         info,
         photoContent,
         favs,
         favClick,
-        editedData
+        editedData,
     } = props.marsPhoto;
 
 

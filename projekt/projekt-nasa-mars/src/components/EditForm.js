@@ -20,6 +20,9 @@ const EditForm = (props) => {
             // alert(JSON.stringify(values, null, 2));
             props.callbackFromParent(formik.values)
         },
+        onReset: values => {
+            props.callbackFromParent(formik.initialValues)
+        }
     });
     return (
         <form onSubmit={formik.handleSubmit} className={"photoEdit"}>
@@ -58,7 +61,8 @@ const EditForm = (props) => {
                 onChange={formik.handleChange}
                 value={formik.values.kamera}
             /><br />
-            <button type="submit">Submit</button>
+            <button type="submit">Zatwierdź</button>
+            <button type="button" onClick={formik.resetForm}>Anuluj</button>
         </form>
     );
 };
