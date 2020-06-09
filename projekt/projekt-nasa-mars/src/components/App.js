@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Formik, Field} from 'formik';
+import {Formik, Field, useFormik} from 'formik';
 import axios from 'axios';
 
 import '../App.css';
 import Form from "./Form";
+import EditForm from "./EditForm";
 import Result from "./Result";
 
 const _ = require('lodash');
@@ -21,8 +22,74 @@ class App extends Component{
         info: [],
         photoContent: [],
         favs: [],
-        favClick: false
+        favClick: false,
+        editedData: {}
     }
+
+    myCallback = (edited) => {
+        // [...we will use the dataFromChild here...]
+        // console.log(dataFromChild);
+
+        // this.setState({
+        //     editedData: dataFromChild
+        // })
+        // this.state.editedData = dataFromChild;
+        console.log(edited);
+        console.log(edited.nrZdj);
+        const index = edited.nrZdj;
+
+        const photoContent2 = this.state.photoContent;
+
+        photoContent2[index] = (
+            <div className={"result"} key={edited.idZdj} id={edited.idZdj}
+            >
+                <img  src={edited.srcZdj} alt={"zdj"} />
+                <div
+                    id={edited.nrZdj}
+                    className={"favHeart"}
+                    onClick={this.handleAddToFavClick}
+                ><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                <p>id: {edited.idZdj}</p>
+                <p>Numer misji: {edited.nrMisji}</p>
+                <p>Data: {edited.dataZdj}</p>
+                <p>Łazik: {edited.roverName}</p>
+                <p>Kamera: {edited.kamera}</p>
+                <p className={"editPhoto"}
+                   onClick={this.handleEditClick}
+                   id={edited.nrZdj}
+                >Edytuj</p>
+
+            </div>
+        )
+
+        const favs2 = this.state.favs;
+
+        const idOfEdited = edited.idZdj;
+        const objToFind = favs2.find(n => n.idZdj === idOfEdited);
+        const index1 = favs2.indexOf(objToFind);
+
+
+        favs2[index1] = {
+            idZdj: edited.idZdj,
+            nrZdj: edited.nrZdj,
+            dataZdj: edited.dataZdj,
+            srcZdj: edited.srcZdj,
+            roverName: edited.roverName,
+            nrMisji: edited.nrMisji,
+            kamera: edited.kamera
+        }
+
+        this.setState({
+            photoContent: photoContent2,
+            favs: favs2
+        })
+
+
+
+
+    }
+
+
 
     handleInputChange = (e) => {
         this.setState({
@@ -78,6 +145,10 @@ class App extends Component{
                         <p>Data: {n.dataZdj}</p>
                         <p>Łazik: {n.roverName}</p>
                         <p>Kamera: {n.kamera}</p>
+                        <p className={"editPhoto"}
+                            onClick={this.handleEditClick}
+                           id={n.nrZdj}
+                        >Edytuj</p>
 
 
                     </div>
@@ -96,19 +167,76 @@ class App extends Component{
     handleAddToFavClick = (e) => {
         const clickedPhoto = e.target.parentNode.parentNode
 
-        const photoIndex = e.target.parentNode.id
+        // const photoIndex = e.target.parentNode.id
+        const photoId = e.target.parentNode.parentNode.id
+        console.log(photoId) //ok
+        // const objToFind = this.state.favs.find(n => n.idZdj === photoId);
+        // const photoIndex = this.state.favs.indexOf(objToFind);
+
+        const info2 = this.state.info
+        console.log(info2)
+        console.log(info2[0].idZdj)
+        const objToFind = info2.find(n => n.idZdj == photoId);
+        console.log(objToFind)
+        const photoIndex = this.state.info.indexOf(objToFind);
+        console.log(photoIndex)
+
         const photoObj = this.state.info[photoIndex]
+        console.log(photoObj)
 
         this.state.favs.push(photoObj)
+    }
+
+    handleEditClick = (e) => {
+
+        // const clickedIndex = e.target.id;
+        const clickedPhoto = e.target.parentNode;
+        console.log(clickedPhoto)
+
+        // const idOfEdited = edited.idZdj;
+        // const objToFind = favs2.find(n => n.idZdj === idOfEdited);
+        // const index1 = favs2.indexOf(objToFind);
+
+        const clickedId = clickedPhoto.id;
+        const objToFind = this.state.favs.find(n => n.idZdj == clickedId);
+        const clickedIndex = this.state.favs.indexOf(objToFind);
+        console.log(clickedIndex)
+
+        const clickedInfo = this.state.info[clickedIndex];
+        console.log(clickedInfo)
+
+        const photoContent2 = this.state.photoContent;
+        photoContent2[clickedIndex] = (
+            <div className={"result"} key={clickedInfo.idZdj} id={clickedInfo.idZdj}>
+            {/*<div className={"result"} key={clickedInfo.idZdj} id={clickedInfo.nrZdj}>*/}
 
 
+                <img  src={clickedInfo.srcZdj} alt={"zdj"} />
+
+            <EditForm
+                photoInfo={clickedInfo}
+                callbackFromParent={this.myCallback}
+            />
+
+            </div>
+        )
 
 
-
-        // console.log(clickedPhoto)
-
+        this.setState({
+            value: "",
+            photoContent: photoContent2,
+        })
 
     }
+
+    // handleSaveEditingClick = (e) => {
+    //
+    //     const index = e.target.parentNode.id
+    //     console.log(this.state.editedData)
+    //
+    //
+    // }
+
 
     handleSubmit = (e) => {
         e.preventDefault();

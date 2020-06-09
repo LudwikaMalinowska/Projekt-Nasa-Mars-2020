@@ -27,6 +27,6 @@ div.result {
     text-align: center;
 }
 
-.favHeart {
+.favHeart, .editPhoto, .saveEditing {
     cursor: pointer;
 }

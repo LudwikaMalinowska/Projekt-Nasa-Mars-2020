@@ -16,7 +16,8 @@ const Result = (props) => {
         info,
         photoContent,
         favs,
-        favClick
+        favClick,
+        editedData
     } = props.marsPhoto;
 
 
