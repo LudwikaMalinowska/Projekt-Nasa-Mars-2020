@@ -27,6 +27,7 @@ class App extends Component{
     }
 
     myCallback = (edited) => {
+        // console.log(edited)
         // [...we will use the dataFromChild here...]
         // console.log(dataFromChild);
 
@@ -34,9 +35,18 @@ class App extends Component{
         //     editedData: dataFromChild
         // })
         // this.state.editedData = dataFromChild;
+        console.log("11111:")
         console.log(edited);
+        console.log("22222:")
         console.log(edited.nrZdj);
-        const index = edited.nrZdj;
+
+
+        const favs2 = this.state.favs;
+
+        const idOfEdited = edited.idZdj;
+        const objToFind = favs2.find(n => n.idZdj === idOfEdited);
+        const index = favs2.indexOf(objToFind);
+        console.log("3333: " + index)
 
         const photoContent2 = this.state.photoContent;
 
@@ -45,10 +55,11 @@ class App extends Component{
             >
                 <img  src={edited.srcZdj} alt={"zdj"} />
                 <div
-                    id={edited.nrZdj}
                     className={"favHeart"}
                     onClick={this.handleAddToFavClick}
-                ><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                >
+                    <i className="fa fa-heart-o" aria-hidden="true"></i>
+                </div>
                 <p>id: {edited.idZdj}</p>
                 <p>Numer misji: {edited.nrMisji}</p>
                 <p>Data: {edited.dataZdj}</p>
@@ -62,14 +73,8 @@ class App extends Component{
             </div>
         )
 
-        const favs2 = this.state.favs;
 
-        const idOfEdited = edited.idZdj;
-        const objToFind = favs2.find(n => n.idZdj === idOfEdited);
-        const index1 = favs2.indexOf(objToFind);
-
-
-        favs2[index1] = {
+        favs2[index] = {
             idZdj: edited.idZdj,
             nrZdj: edited.nrZdj,
             dataZdj: edited.dataZdj,
@@ -129,46 +134,59 @@ class App extends Component{
     handleShowFavClick = (e) => {
 
         const favs2 = this.state.favs
-        const photoContent2 = (
-            favs2.map(n =>
-                (
-                    <div className={"result"} key={n.idZdj} id={n.idZdj}
-                    >
-                        <img  src={n.srcZdj} alt={"zdj"} />
-                        <div
-                            id={n.nrZdj}
-                            className={"favHeart"}
-                            onClick={this.handleAddToFavClick}
-                        ><i className="fa fa-heart-o" aria-hidden="true"></i></div>
-                        <p>id: {n.idZdj}</p>
-                        <p>Numer misji: {n.nrMisji}</p>
-                        <p>Data: {n.dataZdj}</p>
-                        <p>Łazik: {n.roverName}</p>
-                        <p>Kamera: {n.kamera}</p>
-                        <p className={"editPhoto"}
-                            onClick={this.handleEditClick}
-                           id={n.nrZdj}
-                        >Edytuj</p>
+
+        if (favs2 !== undefined && favs2.length > 0) {
+
+            const photoContent2 = (
+                favs2.map(n =>
+                    (
+                        <div className={"result"} key={n.idZdj} id={n.idZdj}
+                        >
+                            <img src={n.srcZdj} alt={"zdj"}/>
+                            <div
+                                className={"favHeart"}
+                                onClick={this.handleAddToFavClick}
+                            >
+                                <i className="fa fa-heart-o" aria-hidden="true"></i>
+                            </div>
+                            <p>id: {n.idZdj}</p>
+                            <p>Numer misji: {n.nrMisji}</p>
+                            <p>Data: {n.dataZdj}</p>
+                            <p>Łazik: {n.roverName}</p>
+                            <p>Kamera: {n.kamera}</p>
+                            <p className={"editPhoto"}
+                               onClick={this.handleEditClick}
+                               id={n.nrZdj}
+                            >Edytuj</p>
 
 
-                    </div>
+                        </div>
+                    )
                 )
             )
-        )
 
-        this.setState({
-            value: "",
-            photoContent: photoContent2,
-            favClick: true
-        })
+            this.setState({
+                value: "",
+                photoContent: photoContent2,
+                favClick: true,
+                info: favs2
+            })
 
+        }
     }
 
     handleAddToFavClick = (e) => {
+        console.log(e.target)
+
         const clickedPhoto = e.target.parentNode.parentNode
+        // const clickedPhoto = e.target.parentNode
+        console.log("ad fav klik")
+        console.log(clickedPhoto)
+        console.log("fav photos:")
+        console.log(this.state.favs)
 
         // const photoIndex = e.target.parentNode.id
-        const photoId = e.target.parentNode.parentNode.id
+        const photoId = clickedPhoto.id
         console.log(photoId) //ok
         // const objToFind = this.state.favs.find(n => n.idZdj === photoId);
         // const photoIndex = this.state.favs.indexOf(objToFind);
@@ -184,13 +202,24 @@ class App extends Component{
         const photoObj = this.state.info[photoIndex]
         console.log(photoObj)
 
-        this.state.favs.push(photoObj)
+        console.log("photo obj")
+        console.log(photoObj)
+
+        const ifIsFavAlready = this.state.favs.includes(photoObj)
+        console.log("fav?:" + ifIsFavAlready)
+        console.log(!ifIsFavAlready && photoObj !== undefined)
+
+        if (!ifIsFavAlready && photoObj !== undefined) {
+            e.target.className = "fa fa-heart"
+            this.state.favs.push(photoObj)
+        }
     }
 
     handleEditClick = (e) => {
 
         // const clickedIndex = e.target.id;
         const clickedPhoto = e.target.parentNode;
+        console.log("1aaaa: ")
         console.log(clickedPhoto)
 
         // const idOfEdited = edited.idZdj;
@@ -198,12 +227,20 @@ class App extends Component{
         // const index1 = favs2.indexOf(objToFind);
 
         const clickedId = clickedPhoto.id;
-        const objToFind = this.state.favs.find(n => n.idZdj == clickedId);
-        const clickedIndex = this.state.favs.indexOf(objToFind);
+        console.log("bbbb: ")
+        console.log(clickedId)
+        // const objToFind = this.state.favs.find(n => n.idZdj == clickedId);
+        const clickedInfo = this.state.favs.find(n => n.idZdj == clickedId);
+        console.log("cccc: ")
+        // console.log(objToFind)
+        console.log(clickedInfo)
+        const clickedIndex = this.state.favs.indexOf(clickedInfo);
+        console.log("ddd:")
         console.log(clickedIndex)
 
-        const clickedInfo = this.state.info[clickedIndex];
-        console.log(clickedInfo)
+        // const clickedInfo = this.state.info[clickedIndex];
+        // console.log("eee: ")
+        // console.log(clickedInfo)
 
         const photoContent2 = this.state.photoContent;
         photoContent2[clickedIndex] = (
@@ -344,10 +381,11 @@ class App extends Component{
                                 >
                                     <img  src={n.srcZdj} alt={"zdj"} />
                                     <div
-                                        id={n.nrZdj}
                                         className={"favHeart"}
                                         onClick={this.handleAddToFavClick}
-                                    ><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                                    >
+                                    <i className="fa fa-heart-o" aria-hidden="true"></i>
+                                </div>
                                     <p>id: {n.idZdj}</p>
                                     <p>Numer misji: {n.nrMisji}</p>
                                     <p>Data: {n.dataZdj}</p>
