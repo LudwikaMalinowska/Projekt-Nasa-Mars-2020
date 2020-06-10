@@ -57,8 +57,6 @@ const Result = (props) => {
             )
         }
 
-
-
     }
 
 
@@ -80,21 +78,6 @@ const Result = (props) => {
                 </div>
             )
         }
-
-
-
-
-        // if (favClick === true){
-        //     content = (
-        //
-        //         <div>
-        //             <p>Zapisane zdjęcia</p>
-        //             <p>Liczba zdjęć: {favs.length}</p>
-        //             <div className={"resultList"}>
-        //                 {photoContent}
-        //             </div>
-        //         </div>
-        //     )}
 
 
         else if (info.length !== 0) {
@@ -123,7 +106,6 @@ const Result = (props) => {
     return (
 
         <div className="result">
-            {/*{error ? `Nie mamy w bazie ${value}` : content}*/}
             {content}
         </div>
 

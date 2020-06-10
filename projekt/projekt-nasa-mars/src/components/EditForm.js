@@ -44,24 +44,17 @@ const EditForm = (props) => {
                 const emailConstainsDot = email.includes(".");
                 const emailLastChar = email[email.length - 1];
 
-                console.log(emailContainsAt)
-                console.log(emailConstainsDot)
-                console.log(emailLastChar)
-
                 if (emailContainsAt && emailConstainsDot && emailLastChar !== '.') {
                     props.callbackFromParent(formik.values);
                 } else {
                     alert("Nieprawidłowy e-mail");
                 }
             }
-            // else
-            //     props.callbackFromParent(formik.values);
 
 
 
         },
         onReset: values => {
-            // props.callbackFromParent(formik.initialValues)
             formik.values = formik.initialValues;
         },
 

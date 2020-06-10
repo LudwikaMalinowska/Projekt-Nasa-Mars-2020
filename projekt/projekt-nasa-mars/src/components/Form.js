@@ -12,24 +12,18 @@ const Form = props => {
                 onSubmit={props.submit}
             >
 
-
                 <input
                     type="text"
                     value={props.value}
                     onChange={props.change}
-
-
                 />
                 <button
-                    // onClick={handleClick}
                     id={"wyszukaj"}
                 >Szukaj</button>
 
             </form>
 
         </div>
-
-
     )
 }
 
