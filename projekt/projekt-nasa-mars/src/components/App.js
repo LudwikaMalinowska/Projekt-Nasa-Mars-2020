@@ -174,10 +174,7 @@ class App extends Component{
 
             if (this.state.sort === true) {
 
-                const sortedId =  _.sortBy(favs2, 'idZdj')
-                console.log("sorted id")
-                console.log(sortedId)
-
+                // const sortedId =  _.sortBy(favs2, 'idZdj')
 
                 this.setState({
                     info: favs2
@@ -382,8 +379,6 @@ class App extends Component{
                 })
                 .then(data => {
 
-                    console.log(data)
-
                     const info = data.reduce( (acc, curr, index) => {
 
                         if (index > 500){
@@ -450,8 +445,6 @@ class App extends Component{
                         favClick: false,
                         info: infoToPrint
                     })
-
-
 
                 })
                 .catch(err => {

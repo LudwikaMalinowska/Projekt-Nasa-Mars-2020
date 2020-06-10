@@ -10,14 +10,10 @@ const Result = (props) => {
         photosNumber,
         submitted,
         searchBy,
-        sort,
-        sortBy,
         info,
         photoContent,
-        favsToAdd,
         favs,
         favClick,
-        editedData,
     } = props.marsPhoto;
 
 
