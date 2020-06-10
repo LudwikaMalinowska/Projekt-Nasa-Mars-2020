@@ -27,10 +27,21 @@ div.result {
     text-align: center;
 }
 
-/*.favHeart {*/
-/*    display: block;*/
-/*}*/
 
-.favHeart i, .editPhoto, .saveEditing {
+.favHeart i, .editPhoto, .saveEditing, .deletePhoto {
     cursor: pointer;
+}
+
+.editPhoto, .deletePhoto {
+    font-weight: bold;
+    font-style: italic;
+    /*padding: 3px 5px;*/
+}
+
+.editDelete {
+    display: flex;
+    flex-direction: row;
+    /*align-content: center;*/
+    justify-content: space-evenly;
+
 }

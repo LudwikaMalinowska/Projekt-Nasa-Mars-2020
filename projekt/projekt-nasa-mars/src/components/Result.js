@@ -1,24 +1,8 @@
 import React from "react";
 import '../Result.css';
-const _ = require('lodash');
-
 
 const Result = (props) => {
 
-
-    // const {
-    //     value,
-    //     error,
-    //     photosNumber,
-    //     submitted,
-    //     searchBy,
-    //     idSort,
-    //     info,
-    //     photoContent,
-    //     favs,
-    //     favClick,
-    //     editedData
-    // } = props.marsPhoto;
 
     const {
         value,

@@ -1,49 +1,101 @@
 import React from 'react';
 import { useFormik } from 'formik';
-
 import '../EditForm.css';
 
 const EditForm = (props) => {
-    // Pass the useFormik() hook initial form values and a submit function that will
-    // be called when the form is submitted
+
     const formik = useFormik({
         initialValues: {
+            nazwaZdj: props.photoInfo.nazwaZdj,
             idZdj: props.photoInfo.idZdj,
             nrZdj: props.photoInfo.nrZdj,
             dataZdj: props.photoInfo.dataZdj,
             srcZdj: props.photoInfo.srcZdj,
             roverName: props.photoInfo.roverName,
+            roverStatus: props.photoInfo.roverStatus,
             nrMisji: props.photoInfo.nrMisji,
-            kamera: props.photoInfo.kamera
+            kamera: props.photoInfo.kamera,
+            opisZdj: props.photoInfo.opisZdj,
+            bossEmail: props.photoInfo.bossEmail
         },
         onSubmit: values => {
-            // alert(JSON.stringify(values, null, 2));
-            props.callbackFromParent(formik.values)
+
+            const dataZdj = formik.values.dataZdj;
+            const year = dataZdj.substring(0, 4);
+            const month = dataZdj.substring(5, 7);
+            const day = dataZdj.substring(8, 10);
+            const timeNow = new Date();
+            const photoTime = new Date(year, month-1, day);
+
+            if (formik.values.nazwaZdj === "") {
+                alert("Nazwa zjęcia nie może być pusta");
+            } else if (formik.values.nrMisji === "") {
+                alert("Numer misji nie może być pusty");
+            } else if (isNaN(formik.values.nrMisji) || formik.values.nrMisji < 0) {
+                alert("Podano nieprawidłowy numer misji")
+            } else if (timeNow.getTime() - photoTime.getTime() < 0) {
+                alert("Wybierz poprawną datę")
+            }
+            else if (formik.values.bossEmail === "") {
+                alert("Email osoby nadzorującej nie może być pusty");
+            } else {
+                const email = formik.values.bossEmail;
+                const emailContainsAt = email.includes("@");
+                const emailConstainsDot = email.includes(".");
+                const emailLastChar = email[email.length - 1];
+
+                console.log(emailContainsAt)
+                console.log(emailConstainsDot)
+                console.log(emailLastChar)
+
+                if (emailContainsAt && emailConstainsDot && emailLastChar !== '.') {
+                    props.callbackFromParent(formik.values);
+                } else {
+                    alert("Nieprawidłowy e-mail");
+                }
+            }
+            // else
+            //     props.callbackFromParent(formik.values);
+
+
+
         },
         onReset: values => {
             // props.callbackFromParent(formik.initialValues)
-            formik.values = formik.initialValues
+            formik.values = formik.initialValues;
         },
 
     });
 
     const onCancel = () => {
-            props.callbackFromParent(formik.initialValues)
+            props.callbackFromParent(formik.initialValues);
     }
 
     return (
         <form onSubmit={formik.handleSubmit} className={"photoEdit"}>
             <p>id: {formik.values.idZdj}</p>
-            <br />
+            <div>
+            <label htmlFor="nazwaZdj">Nazwa zdjęcia: </label>
+            <input
+                id="nazwaZdj"
+                name="nazwaZdj"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.nazwaZdj}
+            />
+            </div>
+            <div>
             <label htmlFor="nrMisji">Numer misji: </label>
             <input
                 id="nrMisji"
                 name="nrMisji"
-                type="number"
+                type="text" //type="number"
                 onChange={formik.handleChange}
                 value={formik.values.nrMisji}
             />
-            <br />
+            </div>
+
+            <div>
             <label htmlFor="dataZdj">Data: </label>
             <input
                 id="dataZdj"
@@ -51,7 +103,10 @@ const EditForm = (props) => {
                 type="date"
                 onChange={formik.handleChange}
                 value={formik.values.dataZdj}
-            /><br />
+            />
+            </div>
+
+            <div>
             <label htmlFor="roverName">Łazik: </label>
                 <select
                         id="roverName"
@@ -64,17 +119,24 @@ const EditForm = (props) => {
                     <option value="Spirit">Spirit</option>
                 </select>
 
+            </div>
 
-            <br />
+            <div>
+            <label htmlFor="roverStatus"> Status łazika: </label>
+            <select
+                id="roverStatus"
+                name="roverStatus"
+                onChange={formik.handleChange}
+                value={formik.values.roverStatus}
+            >
+                <option value="active">active</option>
+                <option value="inactive">inactive</option>
+                <option value="unknown">unknown</option>
+            </select>
+            </div>
+
+            <div>
             <label htmlFor="kamera">Kamera: </label>
-            {/*<input*/}
-            {/*    id="kamera"*/}
-            {/*    name="kamera"*/}
-            {/*    type="text"*/}
-            {/*    onChange={formik.handleChange}*/}
-            {/*    value={formik.values.kamera}*/}
-            {/*/>*/}
-
             <select
                 id="kamera"
                 name="kamera"
@@ -91,11 +153,35 @@ const EditForm = (props) => {
                 <option value="Panoramic Camera">Panoramic Camera</option>
                 <option value="Miniature Thermal Emission Spectrometer">Miniature Thermal Emission Spectrometer</option>
             </select>
+            </div>
 
-            <br />
+            <div>
+            <label htmlFor="opisZdj">Opis zdjęcia (opcjonalne): </label>
+            <input
+                id="opisZdj"
+                name="opisZdj"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.opisZdj}
+            />
+            </div>
+
+            <div>
+                <label htmlFor="bossEmail">E-mail osoby nadzorującej: </label>
+                <input
+                    id="bossEmail"
+                    name="bossEmail"
+                    type="text" //type="email"
+                    onChange={formik.handleChange}
+                    value={formik.values.bossEmail}
+                />
+            </div>
+
+            <div>
             <button type="submit">Zatwierdź</button>
             <button type="button" onClick={formik.resetForm}>Resetuj</button>
             <button type="button" onClick={onCancel}>Anuluj</button>
+            </div>
         </form>
     );
 };

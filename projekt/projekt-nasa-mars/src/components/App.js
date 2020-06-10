@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Formik, Field, useFormik} from 'formik';
+// import {Formik, Field, useFormik} from 'formik';
 import axios from 'axios';
 
 import '../App.css';
@@ -32,7 +32,7 @@ class App extends Component{
         const favs2 = this.state.favs;
 
         const idOfEdited = edited.idZdj;
-        const objToFind = favs2.find(n => n.idZdj === idOfEdited);
+        const objToFind = favs2.find(n => n.idZdj.parseInt === idOfEdited.parseInt);
         const index = favs2.indexOf(objToFind);
 
         const photoContent2 = this.state.photoContent;
@@ -47,28 +47,42 @@ class App extends Component{
                 >
                     <i className="fa fa-heart-o" aria-hidden="true"></i>
                 </div>
+                <p>Nazwa zdjęcia: {edited.nazwaZdj}</p>
                 <p>id: {edited.idZdj}</p>
                 <p>Numer misji: {edited.nrMisji}</p>
                 <p>Data: {edited.dataZdj}</p>
                 <p>Łazik: {edited.roverName}</p>
+                <p>Status łazika: {edited.roverStatus}</p>
                 <p>Kamera: {edited.kamera}</p>
+                <p>Opis zdjęcia: {edited.opisZdj}</p>
+                <p>E-mail osoby nadzorującej: {edited.bossEmail}</p>
+                <div className={"editDelete"}>
                 <p className={"editPhoto"}
                    onClick={this.handleEditClick}
                    id={edited.nrZdj}
                 >Edytuj</p>
+                <p
+                    className={"deletePhoto"}
+                    onClick={this.handleDeleteClick}
+                >Usuń</p>
+                </div>
 
             </div>
         )
 
 
         favs2[index] = {
+            nazwaZdj: edited.nazwaZdj,
             idZdj: edited.idZdj,
             nrZdj: edited.nrZdj,
             dataZdj: edited.dataZdj,
             srcZdj: edited.srcZdj,
             roverName: edited.roverName,
+            roverStatus: edited.roverStatus,
             nrMisji: edited.nrMisji,
-            kamera: edited.kamera
+            kamera: edited.kamera,
+            opisZdj: edited.opisZdj,
+            bossEmail: edited.bossEmail
         }
 
         this.setState({
@@ -78,8 +92,19 @@ class App extends Component{
 
     }
 
-    handleToggleClass = () => {
+    handleDeleteClick = (e) => {
+        const clickedPhoto = e.target.parentNode;
+        console.log(clickedPhoto)
+        const clickedID = clickedPhoto.id;
+        const objToDelete = this.state.favs.find(n => n.idZdj.parseInt === clickedID.parseInt);
+        console.log(objToDelete)
+        const favsWithoutDeleted = this.state.favs.filter(n => n !== objToDelete)
 
+
+        this.state.favs = favsWithoutDeleted;
+
+        console.log(this.state.favs)
+        document.getElementById("showFav").click()
     }
 
 
@@ -116,7 +141,7 @@ class App extends Component{
         if (this.state.favClick === false)
             this.handleSubmit(e)
         else
-            this.handleShowFavClick(e)
+            document.getElementById("showFav").click()
     }
 
     handleSortByIdClick = (e) => {
@@ -142,7 +167,7 @@ class App extends Component{
         if (this.state.favClick === false)
             this.handleSubmit(e)
         else
-            this.handleShowFavClick(e)
+            document.getElementById("showFav").click()
     }
 
     handleShowFavClick = (e) => {
@@ -167,6 +192,8 @@ class App extends Component{
                 favs2 = this.state.info;
 
 
+
+
             }
 
             console.log(favs2)
@@ -185,15 +212,25 @@ class App extends Component{
                             >
                                 <i className="fa fa-heart" aria-hidden="true"></i>
                             </div>
+                            <p>Nazwa zdjęcia: {n.nazwaZdj}</p>
                             <p>id: {n.idZdj}</p>
                             <p>Numer misji: {n.nrMisji}</p>
                             <p>Data: {n.dataZdj}</p>
                             <p>Łazik: {n.roverName}</p>
+                            <p>Status łazika: {n.roverStatus}</p>
                             <p>Kamera: {n.kamera}</p>
+                            <p>Opis zdjęcia: {n.opisZdj}</p>
+                            <p>E-mail osoby nadzorującej: {n.bossEmail}</p>
+                            <div className={"editDelete"}>
                             <p className={"editPhoto"}
                                onClick={this.handleEditClick}
                                id={n.nrZdj}
                             >Edytuj</p>
+                            <p
+                                className={"deletePhoto"}
+                                onClick={this.handleDeleteClick}
+                            >Usuń</p>
+                            </div>
 
 
                         </div>
@@ -246,7 +283,7 @@ class App extends Component{
         const photoId = clickedPhoto.id
 
         const info2 = this.state.info
-        const objToFind = info2.find(n => n.idZdj == photoId);
+        const objToFind = info2.find(n => n.idZdj.parseInt === photoId.parseInt);
         const photoIndex = this.state.info.indexOf(objToFind);
 
         const photoObj = this.state.info[photoIndex]
@@ -267,7 +304,7 @@ class App extends Component{
 
         const clickedPhoto = e.target.parentNode;
         const clickedId = clickedPhoto.id;
-        const clickedInfo = this.state.favs.find(n => n.idZdj == clickedId);
+        const clickedInfo = this.state.favs.find(n => n.idZdj.parseInt === clickedId.parseInt);
         const clickedIndex = this.state.favs.indexOf(clickedInfo);
 
         const photoContent2 = this.state.photoContent;
@@ -311,6 +348,9 @@ class App extends Component{
             this.setState({
                 info: sortedInfo
             })
+
+            if (!this.state.favClick)
+                document.getElementById("wyszukaj").click()
         }
 
 
@@ -342,7 +382,7 @@ class App extends Component{
             const link = APIBaseLink + searchCriteria + '&api_key=' + nasaAPIkey;
 
 
-            const ap2 = axios.get(link)
+            axios.get(link)
                 .then(res => {
 
                     if (res.status === 200) {
@@ -371,13 +411,17 @@ class App extends Component{
                         }
 
                         const photoInfo = {
+                            nazwaZdj: "",
                             idZdj: curr.id,
                             nrZdj: index,
                             dataZdj: curr.earth_date,
                             srcZdj: curr["img_src"],
                             roverName: curr.rover.name,
+                            roverStatus: curr.rover.status,
                             nrMisji: curr.sol,
-                            kamera: curr.camera.full_name
+                            kamera: curr.camera.full_name,
+                            opisZdj: "",
+                            bossEmail: "",
                         }
                         return [...acc, photoInfo];
                     }, [])
@@ -413,8 +457,8 @@ class App extends Component{
                                     <p>id: {n.idZdj}</p>
                                     <p>Numer misji: {n.nrMisji}</p>
                                     <p>Data: {n.dataZdj}</p>
-                                    <p>Łazik: {n.roverName}</p>
-                                    <p>Kamera: {n.kamera}</p>
+                                    {/*<p>Łazik: {n.roverName}</p>*/}
+                                    {/*<p>Kamera: {n.kamera}</p>*/}
 
 
                                 </div>
@@ -445,9 +489,12 @@ class App extends Component{
 
     handleClickOldest = (e) => {
 
+        document.getElementById("dateSearch").click()
+
         const missionNumber = 1; //1sza, najstarsza misja, najstarsze zdjęcia
         const nasaAPIkey = 'C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE';
-        const ap2 = axios.get('https://api.nasa.gov/mars-photos/api/v1/'
+
+        axios.get('https://api.nasa.gov/mars-photos/api/v1/'
             + 'rovers/curiosity/photos?'
             + 'sol=' + missionNumber
             + '&api_key=' + nasaAPIkey)
@@ -462,6 +509,8 @@ class App extends Component{
             .then(response => {
                 // const minDate = response[0].rover.landing_date
                 const firstMissionDate = response[0].earth_date
+
+
 
                 this.setState({
                     value: firstMissionDate,
@@ -478,9 +527,12 @@ class App extends Component{
 
     handleClickNewest = (e) => {
 
+        document.getElementById("dateSearch").click()
+
         const missionNumber = 1;
         const nasaAPIkey = 'C6I8154AGf0UtWBD48apqeVq9tE5ehYbyV8QjmcE';
-        const ap2 = axios.get('https://api.nasa.gov/mars-photos/api/v1/'
+
+        axios.get('https://api.nasa.gov/mars-photos/api/v1/'
             + 'rovers/curiosity/photos?'
             + 'sol=' + missionNumber
             + '&api_key=' + nasaAPIkey)
@@ -496,12 +548,18 @@ class App extends Component{
             .then(response => {
                 const maxDate = response[0].rover.max_date
 
+
+
                 this.setState({
                     value: maxDate,
                     favClick: false
                 })
 
+
+
                 document.getElementById("wyszukaj").click()
+
+
 
             })
             .catch(error => {
@@ -529,13 +587,13 @@ class App extends Component{
                 <div>
                 <p>Daty:</p>
                 <input type="radio" id="dateSearch"
+                       defaultChecked={"checked"}
                        name={"searchCriteria"} value={"date"}
                        onClick={this.handleSearchByDateClick}/>
                 </div>
                 <div>
                 <p>Numeru misji:</p>
                 <input type="radio" id="missionSearch"
-                       defaultChecked={"checked"}
                        name={"searchCriteria"} value={"mission"}
                        onClick={this.handleSearchByMissionClick}/>
                 </div>
@@ -553,7 +611,51 @@ class App extends Component{
                     onClick={this.handleSortDontSortClick}>
                     Nie Sortuj</button>
                 </div>
-                
+
+                {/*<select id={"sort"}>*/}
+                {/*    <option>Nie sortuj</option>*/}
+                {/*    <option onClick={this.handleSortByIdClick}>Id</option>*/}
+                {/*    <option onClick={this.handleSortDontSortClick}>Nr misji</option>*/}
+                {/*</select>*/}
+
+                {/*<form className={"sortform"}>*/}
+                {/*    <div>*/}
+                {/*    <div>*/}
+                {/*        <input type={"checkbox"}  value={"dontSort"}/>*/}
+                {/*        <label htmlFor={"dontSort"}>Nie sortuj</label>*/}
+                {/*        <br/>*/}
+                {/*        <input type={"checkbox"}  value={"sortByID"}/>*/}
+                {/*        <label htmlFor={"sortByID"}>Sortuj po ID</label>*/}
+                {/*        <br/>*/}
+                {/*        <input type={"checkbox"} value={"sortByMission"}/>*/}
+                {/*        <label htmlFor={"sortByMission"}>Sortuj po nr misji</label>*/}
+                {/*        <br/>*/}
+
+                {/*    </div>*/}
+                {/*    <br/>*/}
+                {/*    <button type="submit">Zatwierdź</button>*/}
+                {/*    </div>*/}
+
+                {/*</form>*/}
+
+                {/*<select*/}
+                {/*    id="sortOption"*/}
+                {/*    name="sortOption"*/}
+                {/*    // onChange={formik.handleChange}*/}
+                {/*    // value={formik.values.roverName}*/}
+                {/*>*/}
+                {/*    <option value="Nie sortuj"*/}
+                {/*            onSelect={this.handleSortDontSortClick}*/}
+                {/*            >Nie sortuj</option>*/}
+                {/*    <option value="Sortuj po ID"*/}
+                {/*            onSelect={this.handleSortByIdClick}>Sortuj po ID</option>*/}
+                {/*    <option value="Sortuj po nr Misji"*/}
+                {/*            onClick={this.handleSortDontSortClick}>Sortuj po nr Misji</option>*/}
+                {/*</select>*/}
+                {/*<button type="submit"*/}
+                {/*    onClick={this.handleSort}*/}
+                {/*>Zatwierdź</button>*/}
+
             </div>
 
 
