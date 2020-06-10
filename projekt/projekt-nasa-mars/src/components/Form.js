@@ -18,11 +18,12 @@ const Form = props => {
                     type="text"
                     value={props.value}
                     onChange={props.change}
-                    placeholder="wpisz datę"
+
 
                 />
                 <button
                     // onClick={handleClick}
+                    id={"wyszukaj"}
                 >Szukaj</button>
 
             </form>

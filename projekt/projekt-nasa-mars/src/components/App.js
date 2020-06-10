@@ -129,7 +129,8 @@ class App extends Component{
         if (this.state.favClick === false)
             this.handleSubmit(e)
         else
-            this.handleShowFavClick(e)
+            // this.handleShowFavClick(e)
+            document.getElementById("showFav").click()
     }
 
     handleSortDontSortClick = (e) => {
@@ -159,11 +160,11 @@ class App extends Component{
                 console.log(sortedId)
 
 
-                // this.setState({
-                //     info: favs2
-                // })
-                // this.handleSort();
-                // favs2 = this.state.info;
+                this.setState({
+                    info: favs2
+                })
+                this.handleSort();
+                favs2 = this.state.info;
 
 
             }
@@ -467,6 +468,8 @@ class App extends Component{
                     favClick: false
                 })
 
+                document.getElementById("wyszukaj").click()
+
             })
             .catch(error => {
                 console.log(error)
@@ -498,8 +501,7 @@ class App extends Component{
                     favClick: false
                 })
 
-                // e.persist()
-                // this.handleSubmit(e)
+                document.getElementById("wyszukaj").click()
 
             })
             .catch(error => {
@@ -512,29 +514,37 @@ class App extends Component{
 
 
     render() {
-        return (<div>
+        return (<div className={"wrapper"}>
             <Form
                 value={this.state.value}
                 change={this.handleInputChange}
                 submit={this.handleSubmit}/>
-            <div>
-                <button>Zmień kryteria wyszukiwania</button>
+
+            <div className={"options wrapper"}>
+            <div className={"searchCriteria"}>
+                {/*<button>Zmień kryteria wyszukiwania</button>*/}
+                <p>Zmień kryteria wyszukiwania</p>
 
                 <p>Szukaj według:</p>
+                <div>
                 <p>Daty:</p>
                 <input type="radio" id="dateSearch"
                        name={"searchCriteria"} value={"date"}
                        onClick={this.handleSearchByDateClick}/>
+                </div>
+                <div>
                 <p>Numeru misji:</p>
                 <input type="radio" id="missionSearch"
                        defaultChecked={"checked"}
                        name={"searchCriteria"} value={"mission"}
                        onClick={this.handleSearchByMissionClick}/>
+                </div>
 
             </div>
             <div className={"sort"}>
-                <p>Posortuj według</p>
+                <p>Posortuj według: </p>
 
+                <div className={"sortButtons"}>
                 <button
                     onClick={this.handleSortByIdClick}>Id</button>
                 <button
@@ -542,18 +552,19 @@ class App extends Component{
                 <button
                     onClick={this.handleSortDontSortClick}>
                     Nie Sortuj</button>
-
+                </div>
+                
             </div>
 
 
-            <div>
+            <div className={"minmaxButtons"}>
 
                 <button id={"newest"} onClick={this.handleClickOldest}
                 >Wyszukaj najstarsze</button>
                 <button id={"oldest"} onClick={this.handleClickNewest}
                 >Wyszukaj najnowsze</button>
             </div>
-
+            <div className={"favButtons"}>
             <button
                 id={"addFav"}
                 onClick={this.handleAddChoosenToFavClick}
@@ -563,8 +574,18 @@ class App extends Component{
                 id={"showFav"}
                 onClick={this.handleShowFavClick}
             >Pokaż zapisane zdjęcia</button>
-            <Result marsPhoto={this.state}/>
-        </div>);
+
+        </div>
+        </div>
+
+                <div>
+                    <Result marsPhoto={this.state}/>
+                </div>
+
+            </div>
+
+
+            );
     }
 }
 

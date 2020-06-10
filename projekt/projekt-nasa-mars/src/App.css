@@ -1,50 +1,76 @@
-/*.App {*/
-/*  text-align: center;*/
-/*}*/
+.options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 350px;
+}
 
-/*.App-logo {*/
-/*  height: 40vmin;*/
-/*  pointer-events: none;*/
-/*}*/
+.searchCriteria {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+}
 
-/*@media (prefers-reduced-motion: no-preference) {*/
-/*  .App-logo {*/
-/*    animation: App-logo-spin infinite 20s linear;*/
-/*  }*/
-/*}*/
 
-/*.App-header {*/
-/*  background-color: #282c34;*/
-/*  min-height: 100vh;*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*  font-size: calc(10px + 2vmin);*/
-/*  color: white;*/
-/*}*/
+.searchCriteria input, .searchCriteria p  {
+    display: inline-block;
+}
 
-/*.App-link {*/
-/*  color: #61dafb;*/
-/*}*/
+.searchCriteria p{
+    margin: 3px;
+    font-size: 12px;
+}
 
-/*@keyframes App-logo-spin {*/
-/*  from {*/
-/*    transform: rotate(0deg);*/
-/*  }*/
-/*  to {*/
-/*    transform: rotate(360deg);*/
-/*  }*/
-/*}*/
 
-/*.favHeart {*/
-/*  display: block;*/
-/*}*/
+.sortButtons {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
 
-/*.favHeart, .editPhoto, .saveEditing {*/
-/*  cursor: pointer;*/
-/*}*/
+.sort {
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+}
 
-/*i {*/
-/*  display: block;*/
-/*}*/
+.sort p {
+    text-align: center;
+    font-size: 12px;
+}
+
+.minmaxButtons, .favButtons {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.wrapper {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+button {
+    margin: 1px;
+    padding: 7px;
+    border-color: transparent;
+    background: #000000;
+    text-decoration: none;
+    color: #ccc;
+}
+
+
+button:hover {
+    color: #fff;
+}
+
+button:active {
+    text-decoration: underline;
+    color: #fff;
+
+}
+

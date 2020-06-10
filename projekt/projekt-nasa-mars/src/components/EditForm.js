@@ -39,7 +39,7 @@ const EditForm = (props) => {
             <input
                 id="nrMisji"
                 name="nrMisji"
-                type="text"
+                type="number"
                 onChange={formik.handleChange}
                 value={formik.values.nrMisji}
             />
@@ -48,26 +48,51 @@ const EditForm = (props) => {
             <input
                 id="dataZdj"
                 name="dataZdj"
-                type="text"
+                type="date"
                 onChange={formik.handleChange}
                 value={formik.values.dataZdj}
             /><br />
-            <label htmlFor="roverName">Data: </label>
-            <input
-                id="roverName"
-                name="roverName"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.roverName}
-            /><br />
-            <label htmlFor="kamera">Data: </label>
-            <input
+            <label htmlFor="roverName">Łazik: </label>
+                <select
+                        id="roverName"
+                        name="roverName"
+                        onChange={formik.handleChange}
+                        value={formik.values.roverName}
+                >
+                    <option value="Curiosity">Curiosity</option>
+                    <option value="Opportunity">Opportunity</option>
+                    <option value="Spirit">Spirit</option>
+                </select>
+
+
+            <br />
+            <label htmlFor="kamera">Kamera: </label>
+            {/*<input*/}
+            {/*    id="kamera"*/}
+            {/*    name="kamera"*/}
+            {/*    type="text"*/}
+            {/*    onChange={formik.handleChange}*/}
+            {/*    value={formik.values.kamera}*/}
+            {/*/>*/}
+
+            <select
                 id="kamera"
                 name="kamera"
-                type="text"
                 onChange={formik.handleChange}
                 value={formik.values.kamera}
-            /><br />
+            >
+                <option value="Front Hazard Avoidance Camera">Front Hazard Avoidance Camera</option>
+                <option value="Rear Hazard Avoidance Camera">Rear Hazard Avoidance Camera</option>
+                <option value="Mast Camera">Mast Camera</option>
+                <option value="Chemistry and Camera Complex">Chemistry and Camera Complex</option>
+                <option value="Mars Hand Lens Imager">Mars Hand Lens Imager</option>
+                <option value="Mars Descent Imager">Mars Descent Imager</option>
+                <option value="Navigation Camera">Navigation Camera</option>
+                <option value="Panoramic Camera">Panoramic Camera</option>
+                <option value="Miniature Thermal Emission Spectrometer">Miniature Thermal Emission Spectrometer</option>
+            </select>
+
+            <br />
             <button type="submit">Zatwierdź</button>
             <button type="button" onClick={formik.resetForm}>Resetuj</button>
             <button type="button" onClick={onCancel}>Anuluj</button>
