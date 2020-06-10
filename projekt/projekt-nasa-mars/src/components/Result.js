@@ -39,8 +39,20 @@ const Result = (props) => {
 
     let content = null;
 
+    if (favClick === true){
+        content = (
 
-    if (error){
+            <div>
+                <p>Zapisane zdjęcia</p>
+                <p>Liczba zdjęć: {favs.length}</p>
+                <div className={"resultList"}>
+                    {photoContent}
+                </div>
+            </div>
+        )}
+
+
+    else if (error){
 
 
         if (searchBy === "mission"){
@@ -88,17 +100,17 @@ const Result = (props) => {
 
 
 
-        if (favClick === true){
-            content = (
-
-                <div>
-                    <p>Zapisane zdjęcia</p>
-                    <p>Liczba zdjęć: {favs.length}</p>
-                    <div className={"resultList"}>
-                        {photoContent}
-                    </div>
-                </div>
-            )}
+        // if (favClick === true){
+        //     content = (
+        //
+        //         <div>
+        //             <p>Zapisane zdjęcia</p>
+        //             <p>Liczba zdjęć: {favs.length}</p>
+        //             <div className={"resultList"}>
+        //                 {photoContent}
+        //             </div>
+        //         </div>
+        //     )}
 
 
         else if (info.length !== 0) {

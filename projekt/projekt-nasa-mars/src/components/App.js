@@ -182,7 +182,7 @@ class App extends Component{
                                 className={"favHeart"}
                                 onClick={this.handleAddToFavClick}
                             >
-                                <i className="fa fa-heart-o" aria-hidden="true"></i>
+                                <i className="fa fa-heart" aria-hidden="true"></i>
                             </div>
                             <p>id: {n.idZdj}</p>
                             <p>Numer misji: {n.nrMisji}</p>
@@ -203,12 +203,22 @@ class App extends Component{
             this.setState({
                 value: "",
                 photoContent: photoContent2,
+                favsToAdd: [],
                 favClick: true,
                 info: favs2
             })
 
 
 
+        }
+        else if (favs2.length === 0){
+            this.setState({
+                value: "",
+                photoContent: [],
+                favsToAdd: [],
+                favClick: true,
+                info: favs2
+            })
         }
     }
 
@@ -351,6 +361,8 @@ class App extends Component{
                 })
                 .then(data => {
 
+                    console.log(data)
+
                     const info = data.reduce( (acc, curr, index) => {
 
                         if (index > 500){
@@ -411,6 +423,7 @@ class App extends Component{
 
                     this.setState({
                         photoContent: photoContent,
+                        favsToAdd: [],
                         favClick: false,
                         info: infoToPrint
                     })

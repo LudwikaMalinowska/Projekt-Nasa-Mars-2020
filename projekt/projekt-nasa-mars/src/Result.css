@@ -27,10 +27,10 @@ div.result {
     text-align: center;
 }
 
-.favHeart {
-    display: block;
-}
+/*.favHeart {*/
+/*    display: block;*/
+/*}*/
 
-.favHeart, .editPhoto, .saveEditing {
+.favHeart i, .editPhoto, .saveEditing {
     cursor: pointer;
 }
